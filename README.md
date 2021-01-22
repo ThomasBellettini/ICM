@@ -1,7 +1,7 @@
 <h2 style="text-align: center;"><strong>ICM Project</strong></h2>
 <p>&nbsp;</p>
 <p><strong>Description:</strong></p>
-<p>- Minecraft Server's, with PVP Box and a Faction <b> Jai po fai encor</p>
+<p>- Minecraft Server's, with PVP Box and a Faction <br> Jai po fai encor</p>
 <p><strong>Contributors:</strong></p>
 <ul>
 <li><strong><em>Shurisko (Java Developer and Lead Dev)</em></strong></li>
