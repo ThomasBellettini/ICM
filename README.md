@@ -8,4 +8,12 @@
 <li><strong><em>Zomboglace (Java Developer)</em></strong></li>
 <li><strong><em>Chocaaa (Website Developer)</em></strong></li>
 </ul>
+<p><strong><em>TODO:</em></strong></p>
+<ul>
+<li><strong><em>Make a world great again</em></strong></li>
+</ul>
+<p><strong><em>Done:</em></strong></p>
+<ul>
+<li><strong><em>Ok.</em></strong></li>
+</ul>
 <p>&nbsp;</p>
