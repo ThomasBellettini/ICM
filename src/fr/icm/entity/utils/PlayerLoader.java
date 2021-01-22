@@ -19,50 +19,35 @@ import java.util.*;
 
 public class PlayerLoader {
 
-
-
     private ArrayList<ICMPlayer> playerLoader = new ArrayList<>();
     private Map<ICMPlayer, ScoreboardSign> signMap = new HashMap<>();
+
     public void register(ICMPlayer player)
     {
-        if(!playerLoader.isEmpty())
-        {
-            for(ICMPlayer icmPlayer : playerLoader)
-            {
-                if(icmPlayer.getName().equalsIgnoreCase(player.getName()))
-                {
+        if (!playerLoader.isEmpty())
+            for (ICMPlayer icmPlayer : playerLoader)
+                if (icmPlayer.getName().equalsIgnoreCase(player.getName()))
                     return;
-                }
-            }
-        }
         System.out.println("[!] Adding Player to Loader ! (" + player.getName() + ")");
-        if(player.getLevelPerKit().isEmpty())
-        {
+        if (player.getLevelPerKit().isEmpty())
             player.setDefaultKit();
-        }
         PvPBox.getStorage.write(player);
         playerLoader.add(player);
     }
 
     public void saveAll()
     {
-        if(playerLoader.isEmpty())
+        if (playerLoader.isEmpty())
             return;
-        for(ICMPlayer icmPlayer : playerLoader)
-        {
+        for (ICMPlayer icmPlayer : playerLoader)
             PvPBox.getStorage.write(icmPlayer);
-        }
         Bukkit.broadcastMessage("§7[§eICM§7] §eSauvegarde de §a" + playerLoader.size() + " §eProfile !");
     }
 
     public void savePlayer(ICMPlayer icmPlayer)
     {
-        if(playerLoader.contains(icmPlayer))
-        {
+        if (playerLoader.contains(icmPlayer))
             PvPBox.getStorage.write(icmPlayer);
-        }
-        else
-            return;
     }
 
     public ArrayList<ICMPlayer> getICMPlayer()
@@ -70,49 +55,38 @@ public class PlayerLoader {
         return playerLoader;
     }
 
-    public Map<ICMPlayer, ScoreboardSign> getSignMap() {
+    public Map<ICMPlayer, ScoreboardSign> getSignMap()
+    {
         return signMap;
     }
 
     public ICMPlayer getICMByPlayer(Player bukkitPlayer)
     {
-        if(playerLoader.isEmpty())
+        if (playerLoader.isEmpty())
             return null;
-        for(ICMPlayer joueur : playerLoader)
-        {
-            if(joueur.getName().equalsIgnoreCase(bukkitPlayer.getName()))
-            {
+        for (ICMPlayer joueur : playerLoader)
+            if (joueur.getName().equalsIgnoreCase(bukkitPlayer.getName()))
                 return joueur;
-            }
-        }
         return null;
     }
 
     public Player getPlayerByAPI(ICMPlayer icmPlayer)
     {
-        if(playerLoader.isEmpty())
+        if (playerLoader.isEmpty())
             return null;
-        for(ICMPlayer joueur : playerLoader)
-        {
-            if(joueur.getName().equalsIgnoreCase(icmPlayer.getName()))
-            {
+        for (ICMPlayer joueur : playerLoader)
+            if (joueur.getName().equalsIgnoreCase(icmPlayer.getName()))
                 return Bukkit.getPlayer(icmPlayer.getName());
-            }
-        }
         return null;
     }
 
     public ICMPlayer getICMByName(String playerName)
     {
-        if(playerLoader.isEmpty())
+        if (playerLoader.isEmpty())
             return null;
-        for(ICMPlayer joueur : playerLoader)
-        {
-            if(joueur.getName().equalsIgnoreCase(playerName))
-            {
+        for (ICMPlayer joueur : playerLoader)
+            if (joueur.getName().equalsIgnoreCase(playerName))
                 return joueur;
-            }
-        }
         return null;
     }
 }

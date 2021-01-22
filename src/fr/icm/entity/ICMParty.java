@@ -12,8 +12,7 @@ public class ICMParty {
 
     private ICMPlayer owner;
     private ArrayList<ICMPlayer> member = new ArrayList<>();
-
-    private  int maxMember;
+    private int maxMember;
 
     public ICMParty(ICMPlayer owner, int maxMember)
     {
@@ -25,49 +24,42 @@ public class ICMParty {
     public ICMPlayer getOwner() {
         return owner;
     }
-
     public void setOwner(ICMPlayer owner) {
         this.owner = owner;
     }
-
     public ArrayList<ICMPlayer> getMember() {
         return member;
     }
-
     public int getMaxMember() {
         return maxMember;
     }
 
     public void removeMember(ICMPlayer icmPlayer)
     {
-        if(member.contains(icmPlayer))
-            if(owner.getName().equalsIgnoreCase(icmPlayer.getName()))
-            {
-                for(ICMPlayer player : getMember())
-                {
-                    Player l = Bukkit.getPlayer(player.getName());
-                    if(l == null) continue;
-                    l.sendMessage("§b[!] Votre groupe vient d'être dissout car votre chef l'a quitté !");
+        if (member.contains(icmPlayer))
+            if (owner.getName().equalsIgnoreCase(icmPlayer.getName())) {
+                for (ICMPlayer player : getMember()) {
+                    Player p = Bukkit.getPlayer(player.getName());
+                    if (p == null)
+                        continue;
+                    p.sendMessage("§b[!] Votre groupe vient d'être dissout car votre chef l'a quitté !");
                 }
                 disband();
-            }
-            else
-            {
+            } else {
                 member.remove(icmPlayer);
-                if(member.size() <= 0) disband();
+                if (member.size() <= 0)
+                    disband();
             }
     }
 
     public boolean addMember(ICMPlayer icmPlayer)
     {
-        if(member.size() >= maxMember)
+        if (member.size() >= maxMember)
             return false;
-        if(member.isEmpty()) disband();
-        for(ICMPlayer player : member)
-        {
-            if(player.getName().equalsIgnoreCase(icmPlayer.getName()))
+        if (member.isEmpty()) disband();
+        for (ICMPlayer player : member)
+            if (player.getName().equalsIgnoreCase(icmPlayer.getName()))
                 return false;
-        }
         member.add(icmPlayer);
         return true;
     }
@@ -75,10 +67,9 @@ public class ICMParty {
     public List<Player> convertArrayPlayer()
     {
         List<Player> p = new ArrayList<>();
-        for(ICMPlayer c : getMember())
-        {
+        for (ICMPlayer c : getMember()) {
             Player w = Bukkit.getPlayer(c.getName());
-            if(w == null) return null;
+            if (w == null) return null;
             p.add(w);
         }
         return p;
@@ -86,9 +77,9 @@ public class ICMParty {
 
     public boolean promote(ICMPlayer icmPlayer)
     {
-        if(!member.contains(icmPlayer))
+        if (!member.contains(icmPlayer))
            return false;
-        if(member.isEmpty()) disband();
+        if (member.isEmpty()) disband();
         setOwner(icmPlayer);
         return true;
     }
@@ -96,10 +87,8 @@ public class ICMParty {
     public void disband()
     {
         PartyLoader partyLoader = PvPBox.getPartyLoader;
-        if(partyLoader.getParties().isEmpty())
+        if (partyLoader.getParties().isEmpty())
             return;
         partyLoader.getParties().removeIf(icmParty -> icmParty.getOwner().getName().equalsIgnoreCase(owner.getName()));
-        return;
     }
-
 }

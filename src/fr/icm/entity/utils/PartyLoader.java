@@ -9,34 +9,26 @@ public class PartyLoader {
 
     private ArrayList<ICMParty> parties = new ArrayList<>();
 
-
     public void register(ICMParty party)
     {
-        if(parties.isEmpty())
+        if (parties.isEmpty())
             parties.add(party);
-        else
-        {
-            for(ICMParty icmParty : parties)
-            {
-                if(party.getOwner().getName().equalsIgnoreCase(icmParty.getOwner().getName()))
+        else {
+            for (ICMParty icmParty : parties)
+                if (party.getOwner().getName().equalsIgnoreCase(icmParty.getOwner().getName()))
                     return;
-            }
             parties.add(party);
         }
     }
 
     public ICMParty getPartiesWithMember(ICMPlayer player)
     {
-        if(parties.isEmpty())
+        if (parties.isEmpty())
             return null;
-        for(ICMParty icmParty : parties)
-        {
-            for(ICMPlayer icmPlayer : icmParty.getMember())
-            {
-                if(icmPlayer.getName().equalsIgnoreCase(player.getName()))
+        for (ICMParty icmParty : parties)
+            for (ICMPlayer icmPlayer : icmParty.getMember())
+                if (icmPlayer.getName().equalsIgnoreCase(player.getName()))
                     return icmParty;
-            }
-        }
         return null;
     }
 

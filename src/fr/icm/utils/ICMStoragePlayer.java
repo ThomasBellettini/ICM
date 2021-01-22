@@ -9,7 +9,6 @@ import java.io.*;
 
 public class ICMStoragePlayer
 {
-
     private static File DATA_DIR;
     private Gson gson;
 
@@ -101,8 +100,4 @@ public class ICMStoragePlayer
         }
         return " ";
     }
-
-
-
-
 }

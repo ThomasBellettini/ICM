@@ -24,27 +24,18 @@ import fr.icm.utils.ICMStoragePlayer;
 import fr.icm.utils.NMSTitle;
 import fr.icm.utils.message.ICMConfigMessageStorage;
 import fr.icm.zone.command.CommandZone;
-import fr.icm.zone.event.UserCancelEvent;
 import fr.icm.zone.event.UserEditZoneEvent;
 import fr.icm.zone.event.UserRemoveZoneEvent;
 import fr.icm.zone.event.UserZoneCreate;
 import fr.icm.zone.storage.ICMZoneStorage;
 import fr.icm.zone.utils.ZoneLoader;
-import net.minecraft.server.v1_8_R3.BlockPosition;
-import net.minecraft.server.v1_8_R3.IChatBaseComponent;
-import net.minecraft.server.v1_8_R3.PacketPlayOutOpenSignEditor;
-import net.minecraft.server.v1_8_R3.PacketPlayOutUpdateSign;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.block.Sign;
-import org.bukkit.craftbukkit.v1_8_R3.CraftWorld;
-import org.bukkit.craftbukkit.v1_8_R3.entity.CraftPlayer;
 import org.bukkit.entity.Player;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.scoreboard.Team;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -76,7 +67,6 @@ public class PvPBox extends JavaPlugin
 
     public void onEnable()
     {
-
         getInstance = this;
         getKitLoader = new KitLoader();
         getPlayerLoader = new PlayerLoader();
@@ -138,12 +128,8 @@ public class PvPBox extends JavaPlugin
         {
             getConfig = new ICMMessageConfig();
         }
-
-
         savingSystem();
-
     }
-
 
     private void savingSystem()
     {
@@ -216,12 +202,9 @@ public class PvPBox extends JavaPlugin
                     icmPlayer.setRank(RankEnum.PLAYER);
                     break;
             }
-
-
             nmsTitle.sendTabTitle(p,
                     "§d \n §6 ICM Network \n \n §7Vous êtes connecté sur le serveur §aKitPVP §7(§a" + Bukkit.getOnlinePlayers().size() + "§7) \n ",
                     "\n §eKill(s) : §6" + icmPlayer.getKill() + "§e | Mort(s) : §6" + icmPlayer.getDeath() + "§e | §eCoin(s) : §6" + icmPlayer.getCoins() + " €");
-
         }
 
         Location location = Bukkit.getWorlds().get(0).getSpawnLocation();
@@ -232,7 +215,6 @@ public class PvPBox extends JavaPlugin
         for(Player pall : Bukkit.getOnlinePlayers())
         {
             pall.setScoreboard(PvPBox.getTeamManager.getScoreboard());
-
         }
         /**
         IChatBaseComponent iChatBaseComponent[] = { IChatBaseComponent.ChatSerializer.a("{\"text\": \"§6§lEnter Pseudo\"}"), IChatBaseComponent.ChatSerializer.a("{\"text\": \"§4§m-*---------*\"}"),
@@ -273,9 +255,6 @@ public class PvPBox extends JavaPlugin
                 getPlayerLoader.getSignMap().get(icmPlayer).destroy();
             }
        }
-
-
-
     }
 
     private void loadKit()
