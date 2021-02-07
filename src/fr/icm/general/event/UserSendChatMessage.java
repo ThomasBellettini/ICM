@@ -82,13 +82,18 @@ public class UserSendChatMessage implements Listener {
 
             TextComponent textComponent;
             if (icmPlayer.getRank() == RankEnum.ADMINISTRATOR) {
-                textComponent = new TextComponent(e.getPlayer().getDisplayName() + " §7» ");
+                textComponent = new TextComponent("§7[§a♕§7] ");
+                textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder("§cFonction Administrative,\n \n§6Permet de modifier un compte utilisateur !\n§aSoyez Prudent !").create()));
+                textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.RUN_COMMAND, "/account " + e.getPlayer().getName() + " "));
+                TextComponent txtcmp = new TextComponent(e.getPlayer().getDisplayName() + " §7» ");
                 TextComponent msgq =  new TextComponent(msg);
                 msgq.setColor(icmUser.getRank().getColor());
+                msgq.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(formatadmin).create()));
+                msgq.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/w " + e.getPlayer().getName() + " "));
+                txtcmp.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(formatadmin).create()));
+                txtcmp.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/w " + e.getPlayer().getName() + " "));
+                textComponent.addExtra(txtcmp);
                 textComponent.addExtra(msgq);
-                textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(formatadmin).create()));
-                textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/w " + e.getPlayer().getName() + " "));
-
             } else {
                 textComponent = new TextComponent(e.getPlayer().getDisplayName() + " §7» ");
                 TextComponent msgq =  new TextComponent(msg);

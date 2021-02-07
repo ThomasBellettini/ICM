@@ -5,6 +5,7 @@ import fr.icm.entity.utils.PartyLoader;
 import fr.icm.entity.utils.PlayerLoader;
 import fr.icm.general.commands.CommandMessage;
 import fr.icm.general.commands.CommandReply;
+import fr.icm.general.commands.admin.AccountManagerAccount;
 import fr.icm.general.event.*;
 import fr.icm.general.utils.ICMMessageConfig;
 import fr.icm.general.utils.ScoreboardSign;
@@ -119,6 +120,7 @@ public class PvPBox extends JavaPlugin
         getCommand("reply").setExecutor(new CommandReply());
         getCommand("zone").setExecutor(new CommandZone());
         getCommand("akit").setExecutor(new AdminKitCommand());
+        getCommand("account").setExecutor(new AccountManagerAccount());
 
         setupRankScoreboard();
 

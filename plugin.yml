@@ -43,4 +43,11 @@ commands:
       - kitaccess
       - adminkitaccess
       - setkitaccess
+  account:
+    aliases:
+      - accountmanager
+      - manageaccount
+      - playermanager
+      - pmanage
+      - aplayer
 
