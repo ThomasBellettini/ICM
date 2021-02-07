@@ -66,7 +66,8 @@ public class ICMMessageConfig {
     public String click_msg_sender_hover = "§7[§6!§7] §eSi tu cliques sur le message tu peux directement répondre !";
 
 
-    public ICMMessageConfig(String player_not_connected, String group_was_disband_chief_leave, String cooldown_expired, String combat_tag_remove, String combat_tag_start, String part_author_invitation_sent, String you_cant_dm_urself, String console_dm_you, String message_utilisation, String message_player_not_connected, String cant_reply, String reply_utilisation, String u_cant_invite_urself_in_party, String ur_group_is_full, String already_in_ur_group, String not_in_group, String u_are_not_leader, String party_lead_change, String u_are_alone, String party_kick_member, String no_invitation, String new_member, String player_left_group, String party_disband, String already_in_party, String new_party, String broadcast_all_files_save, String userJoinServer, String userLeftServer, String click_party_invitation_message, String click_party_invitation_hover, String click_msg_receive_message, String click_msg_receive_hover, String click_msg_sender_message, String click_msg_sender_hover) {
+    public ICMMessageConfig(String player_not_connected, String group_was_disband_chief_leave, String cooldown_expired, String combat_tag_remove, String combat_tag_start, String part_author_invitation_sent, String you_cant_dm_urself, String console_dm_you, String message_utilisation, String message_player_not_connected, String cant_reply, String reply_utilisation, String u_cant_invite_urself_in_party, String ur_group_is_full, String already_in_ur_group, String not_in_group, String u_are_not_leader, String party_lead_change, String u_are_alone, String party_kick_member, String no_invitation, String new_member, String player_left_group, String party_disband, String already_in_party, String new_party, String broadcast_all_files_save, String userJoinServer, String userLeftServer, String click_party_invitation_message, String click_party_invitation_hover, String click_msg_receive_message, String click_msg_receive_hover, String click_msg_sender_message, String click_msg_sender_hover)
+    {
         this.player_not_connected = player_not_connected;
         this.cooldown_expired = cooldown_expired;
         this.combat_tag_remove = combat_tag_remove;
@@ -87,5 +88,6 @@ public class ICMMessageConfig {
 
     public ICMMessageConfig()
     {
+
     }
 }

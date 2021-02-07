@@ -21,18 +21,10 @@ public class ICMParty {
         this.maxMember = maxMember;
     }
 
-    public ICMPlayer getOwner() {
-        return owner;
-    }
-    public void setOwner(ICMPlayer owner) {
-        this.owner = owner;
-    }
-    public ArrayList<ICMPlayer> getMember() {
-        return member;
-    }
-    public int getMaxMember() {
-        return maxMember;
-    }
+    public ICMPlayer getOwner() { return owner; }
+    public void setOwner(ICMPlayer owner) { this.owner = owner; }
+    public ArrayList<ICMPlayer> getMember() { return member; }
+    public int getMaxMember() { return maxMember; }
 
     public void removeMember(ICMPlayer icmPlayer)
     {

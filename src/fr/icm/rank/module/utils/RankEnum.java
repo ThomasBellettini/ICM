@@ -2,8 +2,7 @@ package fr.icm.rank.module.utils;
 
 import net.md_5.bungee.api.ChatColor;
 
-public enum RankEnum
-{
+public enum RankEnum {
 
     ADMINISTRATOR("a", "§4§lAdmin ", ChatColor.RED),
     RESPONSABLE("b", "§6Responsable ", ChatColor.YELLOW),
@@ -28,11 +27,9 @@ public enum RankEnum
     public String getGroup_name() {
         return group_name;
     }
-
     public String getPrefix() {
         return prefix;
     }
-
     public ChatColor getColor() {
         return color;
     }

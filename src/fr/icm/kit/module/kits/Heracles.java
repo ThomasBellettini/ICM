@@ -18,7 +18,7 @@ public class Heracles extends Kit {
     public Heracles() {
         super("heracles", 11, false, false);
 
-        Presentation p = new Presentation("§cHéraclès", Arrays.asList("Je suis Héraclès..."), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Héraclès", Arrays.asList("Je suis Héraclès..."), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
 
         super.tier = this.tier;

@@ -5,7 +5,6 @@ import fr.icm.entity.ICMPlayer;
 import fr.icm.entity.utils.PlayerLoader;
 import fr.icm.zone.api.ICMZone;
 import fr.icm.zone.utils.ZoneLoader;
-import org.bukkit.Bukkit;
 import org.bukkit.Material;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -25,26 +24,21 @@ public class UserPlaceOrBreakBlockEvent implements Listener {
     {
         Player p = e.getPlayer();
         ICMPlayer icmPlayer = playerLoader.getICMByPlayer(p);
-        if(icmPlayer == null)
+        if (icmPlayer == null)
             return;
         ArrayList<ICMZone> icmZones = zoneLoader.getIcmZones();
-        if(!icmZones.isEmpty())
-        {
-            for(ICMZone zone : icmZones)
-            {
-                if(zone.isInsideZone(e.getBlock().getLocation()))
-                {
-                    if(zone.isCanDestroy() || p.isOp())
+        if (!icmZones.isEmpty())
+            for (ICMZone zone : icmZones)
+                if (zone.isInsideZone(e.getBlock().getLocation())) {
+                    if (zone.isCanDestroy() || p.isOp())
                         continue;
-                    else if(icmPlayer.getFightingKit() != null && zone.isCanUsePower())
+                    else if (icmPlayer.getFightingKit() != null && zone.isCanUsePower())
                         continue;
                     p.sendMessage(PvPBox.getConfig.zone_can_use);
                     e.setCancelled(true);
                     return;
                 }
-            }
-        }
-        if(icmPlayer.getFightingKit() != null)
+        if (icmPlayer.getFightingKit() != null)
             icmPlayer.getFightingKit().whenBreakBlock(e);
     }
 
@@ -53,34 +47,24 @@ public class UserPlaceOrBreakBlockEvent implements Listener {
     {
         Player p = e.getPlayer();
         ICMPlayer icmPlayer = playerLoader.getICMByPlayer(p);
-        if(icmPlayer == null)
+        if (icmPlayer == null)
             return;
         ArrayList<ICMZone> icmZones = zoneLoader.getIcmZones();
-        if(!icmZones.isEmpty())
-        {
-            for(ICMZone zone : icmZones)
-            {
-                if(zone.isInsideZone(e.getBlock().getLocation()))
-                {
-                    if(zone.isCanBuild() || p.isOp())
+        if (!icmZones.isEmpty())
+            for (ICMZone zone : icmZones)
+                if (zone.isInsideZone(e.getBlock().getLocation())) {
+                    if (zone.isCanBuild() || p.isOp())
                         continue;
-                    else if(icmPlayer.getFightingKit() != null && zone.isCanUsePower())
+                    else if (icmPlayer.getFightingKit() != null && zone.isCanUsePower())
                         continue;
                     p.sendMessage(PvPBox.getConfig.zone_can_use);
                     e.setCancelled(true);
                     return;
                 }
-            }
-        }
-        if(icmPlayer.getFightingKit() != null)
-        {
-            if(e.getBlock().getType() == Material.TNT)
+        if (icmPlayer.getFightingKit() != null) {
+            if (e.getBlock().getType() == Material.TNT)
                 icmPlayer.getFightingKit().whenPlacingTNT(e);
             icmPlayer.getFightingKit().whenPlaceBlock(e);
         }
     }
-
-
-
-
 }

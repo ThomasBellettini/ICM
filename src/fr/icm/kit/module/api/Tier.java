@@ -14,8 +14,8 @@ public class Tier
     private Presentation presentation;
     private int cooldown;
 
-
-    public Tier(int level, int price, ArrayList<ItemStack> composition, String kitName, Presentation presentation, int cooldown) {
+    public Tier(int level, int price, ArrayList<ItemStack> composition, String kitName, Presentation presentation, int cooldown)
+    {
         this.level = level;
         this.price = price;
         this.composition = composition;
@@ -41,7 +41,8 @@ public class Tier
 
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Tier{" +
                 "level=" + level +
                 ", price=" + price +

@@ -9,23 +9,25 @@ import java.lang.reflect.Field;
 
 public class NMSTitle {
 
-    public void sendTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String message) {
+    public void sendTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String message)
+    {
         sendTitle(player, fadeIn, stay, fadeOut, message, null);
     }
 
     @Deprecated
-    public void sendSubtitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String message) {
+    public void sendSubtitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String message)
+    {
         sendTitle(player, fadeIn, stay, fadeOut, null, message);
     }
 
     @Deprecated
-    public void sendFullTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String title,
-                              String subtitle) {
+    public void sendFullTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String title, String subtitle)
+    {
         sendTitle(player, fadeIn, stay, fadeOut, title, subtitle);
     }
 
-    public void sendTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String title,
-                          String subtitle) {
+    public void sendTitle(Player player, Integer fadeIn, Integer stay, Integer fadeOut, String title, String subtitle)
+    {
         PlayerConnection connection = ((CraftPlayer) player).getHandle().playerConnection;
 
         PacketPlayOutTitle packetPlayOutTimes = new PacketPlayOutTitle(PacketPlayOutTitle.EnumTitleAction.TIMES, null,
@@ -49,16 +51,14 @@ public class NMSTitle {
         }
     }
 
-    public void sendTabTitle(Player player, String header, String footer) {
-        if (header == null) {
+    public void sendTabTitle(Player player, String header, String footer)
+    {
+        if (header == null)
             header = "";
-        }
         header = ChatColor.translateAlternateColorCodes('&', header);
-        if (footer == null) {
+        if (footer == null)
             footer = "";
-        }
         footer = ChatColor.translateAlternateColorCodes('&', footer);
-
         header = header.replaceAll("%player%", player.getDisplayName());
         footer = footer.replaceAll("%player%", player.getDisplayName());
 
@@ -77,7 +77,8 @@ public class NMSTitle {
         }
     }
 
-    public void sendActionBar(Player player, String message){
+    public void sendActionBar(Player player, String message)
+    {
         CraftPlayer p = (CraftPlayer) player;
         IChatBaseComponent cbc = IChatBaseComponent.ChatSerializer.a("{\"text\": \"" + message + "\"}");
         PacketPlayOutChat ppoc = new PacketPlayOutChat(cbc,(byte) 2);

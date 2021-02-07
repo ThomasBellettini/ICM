@@ -18,7 +18,7 @@ public class Thor extends Kit {
     public Thor() {
         super("thor", 27, false, false);
 
-        Presentation p = new Presentation("§cKit Thor", Arrays.asList("Je suis le dieu de la foudre"), Material.REDSTONE);
+        Presentation p = new Presentation("§6» Kit Thor", Arrays.asList("Je suis le dieu de la foudre"), Material.REDSTONE);
 
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
 

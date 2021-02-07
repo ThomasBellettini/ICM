@@ -21,18 +21,16 @@ public class ICMTypeAdapter extends TypeAdapter<ICMPlayer> {
     private static Type seriTypes = new TypeToken<List<String>>() {}.getType();
 
     @Override
-    public void write(JsonWriter writer, ICMPlayer icmPlayer) throws IOException {
-
+    public void write(JsonWriter writer, ICMPlayer icmPlayer) throws IOException
+    {
         Gson gson = new GsonBuilder()
                 .disableHtmlEscaping()
                 .setPrettyPrinting()
                 .serializeNulls()
                 .create();
-
         String map = gson.toJson(icmPlayer.getLevelPerKit());
         String list =gson.toJson(icmPlayer.getKitAccess());
         writer.beginObject();
-
         writer.name("playerName").value(icmPlayer.getName());
         writer.name("kill").value(icmPlayer.getKill());
         writer.name("death").value(icmPlayer.getDeath());
@@ -40,13 +38,12 @@ public class ICMTypeAdapter extends TypeAdapter<ICMPlayer> {
         writer.name("adresseIP").value(icmPlayer.getAdressIP());
         writer.name("levelPerKit").value(map);
         writer.name("accessKit").value(list);
-
         writer.endObject();
-
     }
 
     @Override
-    public ICMPlayer read(JsonReader reader) throws IOException {
+    public ICMPlayer read(JsonReader reader) throws IOException
+    {
         Gson gson = new GsonBuilder()
                 .disableHtmlEscaping()
                 .setPrettyPrinting()
@@ -62,11 +59,9 @@ public class ICMTypeAdapter extends TypeAdapter<ICMPlayer> {
         HashMap<String, Integer> levelPerKit = new HashMap<>();
         List<String> acessKit = new ArrayList<>();
 
-        while(reader.hasNext())
-        {
+        while (reader.hasNext()) {
             String s = reader.nextName();
-            switch (s)
-            {
+            switch (s) {
                 case "playerName":
                     name = reader.nextString();
                     break;
@@ -82,7 +77,6 @@ public class ICMTypeAdapter extends TypeAdapter<ICMPlayer> {
                 case "adresseIP":
                     adresseIP = reader.nextString();
                     break;
-
                 case "levelPerKit":
                     levelPerKit = gson.fromJson(reader.nextString(), seriType);
                     break;
@@ -94,8 +88,6 @@ public class ICMTypeAdapter extends TypeAdapter<ICMPlayer> {
             }
         }
         reader.endObject();
-
-         return new ICMPlayer(name, kill, death, coins, adresseIP ,levelPerKit, acessKit);
-
+        return new ICMPlayer(name, kill, death, coins, adresseIP ,levelPerKit, acessKit);
     }
 }

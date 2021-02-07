@@ -25,11 +25,11 @@ public class TimeMaster extends Kit {
     Tier[] tier = new Tier[1];
 
     public TimeMaster() {
-        super("timemaster", 28, false, true);
+        super("maitredutemps", 28, false, true);
 
         setSecret(true);
 
-        Presentation p = new Presentation("§cMaître du temps", Arrays.asList("Je stop le temps"), Material.WATCH);
+        Presentation p = new Presentation("§6» Kit Maître du temps", Arrays.asList("Je stop le temps"), Material.WATCH);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 30);
 
         super.tier = this.tier;

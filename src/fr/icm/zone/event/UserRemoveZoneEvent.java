@@ -23,33 +23,26 @@ public class UserRemoveZoneEvent implements Listener {
         Inventory inventory = e.getClickedInventory();
         ItemStack itemStack = e.getCurrentItem();
 
-        if(inventory.getName().startsWith("§7(§c"))
-        {
+        if (e.getCurrentItem() == null || e.getInventory() == null)
+            return;
+        if (inventory.getName().startsWith("§7(§c")) {
             e.setCancelled(true);
             String zone_Name = inventory.getName().replace("§7(§c", "").replace("§7)", "");
             ArrayList<ICMZone> icmZones = new ArrayList<>(zoneLoader.getIcmZones());
             icmZones.removeIf(z -> !z.getName().equalsIgnoreCase(zone_Name));
-            if(icmZones.isEmpty())
-            {
+            if (icmZones.isEmpty()) {
                 p.closeInventory();
                 return;
             }
             ICMZone icmZone = icmZones.get(0);
-            if(itemStack != null && itemStack.hasItemMeta())
-            {
-                if(itemStack.getData().getData() == 13)
-                {
+            if(itemStack != null && itemStack.hasItemMeta()) {
+                if(itemStack.getData().getData() == 13) {
                     icmZone.delete();
                     p.sendMessage("§7[§eICM§7] §cVous venez de supprimer la zone " + icmZone.getName().substring(0, 1).toUpperCase() + icmZone.getName().substring(1));
                     p.closeInventory();
-                }
-                else if(itemStack.getData().getData() == 14)
-                {
+                } else if (itemStack.getData().getData() == 14)
                     p.closeInventory();
-                }
             }
         }
-
     }
-
 }

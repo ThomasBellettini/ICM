@@ -21,7 +21,6 @@ import java.util.ArrayList;
 
 public class ICMGuiKit {
 
-
     private KitLoader kitLoader = PvPBox.getKitLoader;
     private PlayerLoader playerLoader = PvPBox.getPlayerLoader;
 
@@ -43,7 +42,8 @@ public class ICMGuiKit {
         kitsMeta.setDisplayName("Kit");
         if (guiType == ICMGuiType.GUI_MAIN) {
             kitsMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-            kitsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS); }
+            kitsMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
         kitsMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         kits.setItemMeta(kitsMeta);
 
@@ -52,7 +52,8 @@ public class ICMGuiKit {
         kitUnrestrictedMeta.setDisplayName("Kit non VIP");
         if (guiType == ICMGuiType.GUI_UNRESTRICTED) {
             kitUnrestrictedMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-            kitUnrestrictedMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS); }
+            kitUnrestrictedMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
         kitUnrestrictedMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         kitUnrestricted.setItemMeta(kitUnrestrictedMeta);
 
@@ -61,7 +62,8 @@ public class ICMGuiKit {
         kitVIPMeta.setDisplayName("Kit VIP");
         if (guiType == ICMGuiType.GUI_VIP) {
             kitVIPMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-            kitVIPMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS); }
+            kitVIPMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
         kitVIPMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         kitVIP.setItemMeta(kitVIPMeta);
 
@@ -70,7 +72,8 @@ public class ICMGuiKit {
         kitUnlockedMeta.setDisplayName("Kit Disponible");
         if (guiType == ICMGuiType.GUI_ACCESSED) {
             kitUnlockedMeta.addEnchant(Enchantment.DAMAGE_ALL, 1, true);
-            kitUnlockedMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS); }
+            kitUnlockedMeta.addItemFlags(ItemFlag.HIDE_ENCHANTS);
+        }
         kitUnlockedMeta.addItemFlags(ItemFlag.HIDE_ATTRIBUTES);
         kitUnlocked.setItemMeta(kitUnlockedMeta);
 
@@ -110,29 +113,27 @@ public class ICMGuiKit {
         inventory.setItem(50, nothing);
         inventory.setItem(51, nothing);
         inventory.setItem(52, nothing);
-        ArrayList<Kit> kit = new ArrayList<>(kitLoader.getKit());
 
+        ArrayList<Kit> kit = new ArrayList<>(kitLoader.getKit());
         int maxPage= 0;
         int size = 0;
         int max = 0;
         int min = 0;
-        switch (guiType)
-        {
+        switch (guiType) {
             case GUI_MAIN:
                 kit.removeIf(Kit::isSecret);
                  size = kit.size();
-                maxPage = (int) Math.ceil((float) size / 21);
+                 maxPage = (int) Math.ceil((float) size / 21);
                  max = 21 * page;
                  min = 21 * (page - 1);
-
                 break;
             case GUI_UNRESTRICTED:
                 kit.removeIf(Kit::isVIP);
                 kit.removeIf(Kit::isSecret);
                 size = kit.size();
                 maxPage = (int) Math.ceil((float) size / 21);
-                 max = 21 * page;
-                 min = 21 * (page - 1);
+                max = 21 * page;
+                min = 21 * (page - 1);
                 break;
             case GUI_VIP:
                 kit.removeIf(k -> !k.isVIP());
@@ -143,57 +144,43 @@ public class ICMGuiKit {
                 min = 21 * (page - 1);
                 break;
             case GUI_ACCESSED:
-                if(icmPlayer.getKitAccess().isEmpty())
+                if (icmPlayer.getKitAccess().isEmpty())
                     break;
                 kit.removeIf(k -> !icmPlayer.getKitAccess().contains(k.getKitName().toLowerCase()));
-                if(kit.isEmpty())
+                if (kit.isEmpty())
                     break;
                 size = kit.size();
                 maxPage = (int) Math.ceil((float) size / 21);
                 max = 21 * page;
                 min = 21 * (page - 1);
                 break;
-
             default:
                 playerLoader.getPlayerByAPI(icmPlayer).sendMessage("§cError 404");
                 break;
-
         }
-
-        for(int i = min; i<max; i++)
-        {
-            if(kit.size() <= i)
+        for (int i = min; i<max; i++) {
+            if (kit.size() <= i)
                 break;
-
             Kit k = kit.get(i);
             int s = icmPlayer.getKitLevel(k.getKitName());
             Tier t = k.getKitTierByLevel(s);
             Presentation p = t.getPresentation();
 
             Player player = playerLoader.getPlayerByAPI(icmPlayer);
-            if(player == null)
+            if (player == null)
                 break;
-
             ItemStack kit_item = new ItemStack(p.getIcon());
 
-            if(!player.hasPermission("icm.vip") && !icmPlayer.getKitAccess().contains(k.getKitName()))
-            {
+            if (!player.hasPermission("icm.vip") && !icmPlayer.getKitAccess().contains(k.getKitName()))
                 if(k.isVIP())
-                {
                     kit_item = new ItemStack(Material.BARRIER);
-                }
-            }
 
             ItemMeta itemMeta = kit_item.getItemMeta();
             itemMeta.setLore(p.getDescription());
             itemMeta.setDisplayName(p.getName());
             kit_item.setItemMeta(itemMeta);
-
-
-
             inventory.addItem(kit_item);
         }
-
         ItemStack next = new ItemStack(Material.PAPER);
         ItemMeta nextMeta = next.getItemMeta();
         nextMeta.setDisplayName("§bPage suivante (§a" + page + "§c/" + maxPage + "§a)");
@@ -213,9 +200,6 @@ public class ICMGuiKit {
             inventory.setItem(53, next);
         else
             inventory.setItem(53, nothing);
-
         return inventory;
     }
-
-
 }

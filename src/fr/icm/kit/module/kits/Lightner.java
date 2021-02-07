@@ -18,7 +18,7 @@ public class Lightner extends Kit {
     public Lightner() {
         super("eclaireur", 16, false, false);
 
-        Presentation p = new Presentation("§cÉclaireur", Arrays.asList("La vitesse n'est pas un problème"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Éclaireur", Arrays.asList("La vitesse n'est pas un problème"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
         tier[1] = new Tier(2, 100, tierTwo(), getKitName(), p, 0);
 

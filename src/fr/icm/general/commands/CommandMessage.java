@@ -20,40 +20,30 @@ public class CommandMessage implements CommandExecutor {
     PlayerLoader playerLoader = PvPBox.getPlayerLoader;
 
     @Override
-    public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args) {
-
-        if(sender instanceof Player)
-        {
-            if(args.length > 1)
-            {
+    public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args)
+    {
+        if (sender instanceof Player) {
+            if (args.length > 1) {
                 Player p = Bukkit.getPlayer(args[0]);
-                if(p == null)
-                {
+                if (p == null) {
                     sender.sendMessage("§c[!] Le Joueur que vous essayez de DM n'est pas connecté !");
                     return false;
                 }
-                if(sender.getName().equalsIgnoreCase(p.getName()))
-                {
+                if (sender.getName().equalsIgnoreCase(p.getName())) {
                     sender.sendMessage("§7[§c!§7] §cTu peux DM Zomboglace si tu cherche un ami :)");
                     return true;
                 }
-
                 StringBuilder stringBuilder = new StringBuilder();
-                for(String part : args){
-                    if(part.equalsIgnoreCase(p.getName()))
-                        continue;
-                    stringBuilder.append(part + " ");
+                for (int i = 1; i < args.length; ++i) {
+                    stringBuilder.append(args[i] + " ");
                 }
-
                 ICMPlayer icmPlayer = playerLoader.getICMByPlayer((Player) sender);
-                if(icmPlayer == null)
-                {
+                if (icmPlayer == null) {
                     icmPlayer = new ICMPlayer(sender.getName(), 0, 0, 0, ((Player) sender).getAddress().getHostString());
                     playerLoader.register(icmPlayer);
                 }
                 ICMPlayer icmVictim = playerLoader.getICMByPlayer(p);
-                if(icmVictim == null)
-                {
+                if (icmVictim == null) {
                     icmVictim = new ICMPlayer(p.getName(), 0, 0, 0, p.getAddress().getHostString());
                     playerLoader.register(icmVictim);
                 }
@@ -70,42 +60,32 @@ public class CommandMessage implements CommandExecutor {
 
                 icmVictim.setLastDM(icmPlayer.getName());
                 icmPlayer.setLastDM(icmVictim.getName());
-
                 p.spigot().sendMessage(textComponent);
                 ((Player) sender).spigot().sendMessage(textComponents);
-            }
-            else
-            {
+            } else {
                 sender.sendMessage("§7[§c!§7] §aUtilisation : /w <player> <message>");
                 return true;
             }
-        }
-        else
-        {
-            if(args.length > 1)
-            {
+        } else {
+            if (args.length > 1) {
                 Player p = Bukkit.getPlayer(args[0]);
-                if(p == null)
-                {
+                if (p == null) {
                     sender.sendMessage("§c[!] Le Joueur que vous essayez de DM n'est pas connecté !");
                     return false;
                 }
                 StringBuilder stringBuilder = new StringBuilder();
-                for(String part : args){
-                    if(part.equalsIgnoreCase(p.getName()))
+                for (String part : args) {
+                    if (part.equalsIgnoreCase(p.getName()))
                         continue;
                     stringBuilder.append(part + " ");
                 }
                 String message = stringBuilder.toString();
                 p.sendMessage("§7(§aMessage§7) §7[§cConsole §7» §aVous§7] : §b" + message);
-            }
-            else
-            {
+            } else {
                 sender.sendMessage("§7[§c!§7] §aUtilisation : /w <player> <message>");
                 return true;
             }
         }
-
         return false;
     }
 }

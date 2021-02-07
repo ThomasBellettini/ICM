@@ -18,7 +18,7 @@ public class Viper extends Kit {
     public Viper() {
         super("viper", 32, false, false);
 
-        Presentation p = new Presentation("§cKit Viper", Arrays.asList("Je suis un serpent."), Material.REDSTONE);
+        Presentation p = new Presentation("§6» Kit Viper", Arrays.asList("Je suis un serpent."), Material.REDSTONE);
 
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
 

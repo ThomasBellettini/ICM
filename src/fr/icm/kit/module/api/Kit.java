@@ -10,19 +10,17 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class Kit
-{
+public class Kit {
 
     private String kitName;
     private int kitID;
     private boolean isVIP;
-
     private boolean isSecret;
-
     protected Tier[] tier;
     private boolean onCooldown;
 
-    protected Kit(String kitName, int kitID, boolean isVIP, boolean onCooldown) {
+    protected Kit(String kitName, int kitID, boolean isVIP, boolean onCooldown)
+    {
         this.kitName = kitName;
         this.kitID = kitID;
         this.isVIP = isVIP;
@@ -33,7 +31,6 @@ public class Kit
     public boolean isSecret() {
         return isSecret;
     }
-
     public void setSecret(boolean secret) {
         isSecret = secret;
     }
@@ -42,10 +39,7 @@ public class Kit
      * @Getter
      */
 
-
-    public String getKitName() {
-        return kitName;
-    }
+    public String getKitName() { return kitName; }
     public int getKitID() {
         return kitID;
     }
@@ -62,14 +56,12 @@ public class Kit
     public Tier getKitTierByLevel(int level)
     {
         List<Tier> tier = new ArrayList<>(Arrays.asList(this.tier));
-        if(tier.isEmpty()) return null;
-        for(Tier t : tier)
-        {
-            if(t.getLevel() == level)
-            {
+        if (tier.isEmpty())
+            return null;
+        for (Tier t : tier)
+            if (t.getLevel() == level) {
                 return t;
             }
-        }
         return null;
     }
 
@@ -108,7 +100,8 @@ public class Kit
 
 
     @Override
-    public String toString() {
+    public String toString()
+    {
         return "Kit{" +
                 "kitName='" + kitName + '\'' +
                 ", kitID=" + kitID +

@@ -7,7 +7,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.inventory.InventoryClickEvent;
-import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 
@@ -18,53 +17,42 @@ import java.util.Objects;
 
 public class UserEditZoneEvent implements Listener {
 
-
     @EventHandler
     public void userInteractInInventory(InventoryClickEvent e)
     {
         Player p = (Player) e.getWhoClicked();
-        if(e.getCurrentItem() == null)
+        if (e.getCurrentItem() == null)
             return;
-        if(e.getInventory().getName().equalsIgnoreCase("§6Editeur de zone !"))
-        {
+        if (e.getInventory().getName().equalsIgnoreCase("§6Editeur de zone !")) {
             e.setCancelled(true);
             ArrayList<ItemStack> itemStacks = new ArrayList<>(Arrays.asList(e.getInventory().getContents()));
             itemStacks.removeIf(Objects::isNull);
             itemStacks.removeIf(i -> i.getType() != Material.BOOK);
             ItemStack info = itemStacks.get(0);
-            if(info.hasItemMeta() && info.getItemMeta().hasLore())
-            {
+            if (info.hasItemMeta() && info.getItemMeta().hasLore()) {
                 List<String> lore = info.getItemMeta().getLore();
                 lore.removeIf(l -> !l.startsWith(" §e» Nom de la Zone : §a"));
                 String name = lore.get(0).replace(" §e» Nom de la Zone : §a", "");
                 ICMZone icmZone = PvPBox.getZoneLoader.getZonePerName(name);
-                if(icmZone == null)
-                {
+                if (icmZone == null) {
                     p.closeInventory();
                     return;
                 }
-
-
                 ItemStack negative = new ItemStack(Material.INK_SACK, 1, (short)1);
                 ItemMeta meta = negative.getItemMeta();
                 meta.setLore(Arrays.asList(" ", "     §eSi tu cliques sur cette item,", "     §etu §aactiveras§e la fonctionalité !", " "));
-
 
                 ItemStack positive = new ItemStack(Material.INK_SACK, 1, (short)10);
                 ItemMeta positive_meta = positive.getItemMeta();
                 positive_meta.setLore(Arrays.asList(" ", "     §eSi tu cliques sur cette item,", "     §etu §cdésactiveras§e la fonctionalité !", " "));
 
                 ItemStack item = e.getCurrentItem();
-                if(item.hasItemMeta() && item.getItemMeta().hasDisplayName() && item.getType() == Material.INK_SACK)
-                {
+                if (item.hasItemMeta() && item.getItemMeta().hasDisplayName() && item.getType() == Material.INK_SACK) {
                     String names = item.getItemMeta().getDisplayName();
                     String l = "NULL";
-                    switch (item.getData().getData())
-                    {
+                    switch (item.getData().getData()) {
                         case 1:
-
-                            switch (names.replace("§e", ""))
-                            {
+                            switch (names.replace("§e", "")) {
                                 case "PVP":
                                     icmZone.setCanPvp(true);
                                     l = "le PVP";
@@ -126,8 +114,7 @@ public class UserEditZoneEvent implements Listener {
                             icmZone.save();
                             return;
                         case 10:
-                            switch (names.replace("§e", ""))
-                            {
+                            switch (names.replace("§e", "")) {
                                 case "PVP":
                                     icmZone.setCanPvp(false);
                                     l = "le PVP";
@@ -188,17 +175,12 @@ public class UserEditZoneEvent implements Listener {
                             p.sendMessage(mdr .replace("%m%", l));
                             icmZone.save();
                             return;
-
                         default:
                             p.sendMessage("§cError 505");
                             break;
                     }
-
                 }
             }
-
         }
-
     }
-
 }

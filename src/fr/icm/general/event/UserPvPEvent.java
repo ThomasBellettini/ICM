@@ -23,58 +23,41 @@ public class UserPvPEvent implements Listener {
     @EventHandler
     public void userFightOtherPlayer(EntityDamageByEntityEvent e)
     {
-
-        if(e.getEntity() instanceof Player)
-        {
-            if(!(e.getDamager() instanceof Player))
-            {
-                if(!(e.getDamager() instanceof Projectile))
-                {
+        if (e.getEntity() instanceof Player) {
+            if (!(e.getDamager() instanceof Player)) {
+                if (!(e.getDamager() instanceof Projectile))
                     return;
-                }
-                else
-                {
-                    if(!(((Projectile) e.getDamager()).getShooter() instanceof Player))
-                    {
-                        return;
-                    }
-                }
+                else if (!(((Projectile) e.getDamager()).getShooter() instanceof Player))
+                    return;
             }
+
             Player attacker = null;
             Player victim = (Player)e.getEntity();
-
-            if(e.getDamager() instanceof Player)
+            if (e.getDamager() instanceof Player)
                 attacker = (Player) e.getDamager();
-            else if(e.getDamager() instanceof Projectile)
+            else if (e.getDamager() instanceof Projectile)
                 attacker = (Player) ((Projectile) e.getDamager()).getShooter();
-
-            if(attacker == null)
+            if (attacker == null)
                 return;
 
             ICMPlayer icmAttacker = playerLoader.getICMByPlayer(attacker);
             ICMPlayer icmVictim = playerLoader.getICMByPlayer(victim);
-
-            if(icmAttacker == null)
+            if (icmAttacker == null)
                 return;
-            if(icmVictim == null)
+            if (icmVictim == null)
                 return;
 
             ArrayList<ICMZone> zones = zoneLoader.getIcmZones();
-            if(!zones.isEmpty())
-            {
-                for(ICMZone zone : zones)
-                {
-                    if(zone.isInsideZone(attacker))
-                    {
-                        if(zone.isCanPvp() && !zone.isInvicible())
+            if (!zones.isEmpty()) {
+                for (ICMZone zone : zones) {
+                    if (zone.isInsideZone(attacker)) {
+                        if (zone.isCanPvp() && !zone.isInvicible())
                             continue;
                         attacker.sendMessage(PvPBox.getConfig.zone_can_use);
                         e.setCancelled(true);
                         return;
-                    }
-                    else if(zone.isInsideZone(victim))
-                    {
-                        if(zone.isCanPvp() && !zone.isInvicible())
+                    } else if (zone.isInsideZone(victim)) {
+                        if (zone.isCanPvp() && !zone.isInvicible())
                             continue;
                         attacker.sendMessage(PvPBox.getConfig.zone_can_use);
                         e.setCancelled(true);
@@ -82,87 +65,51 @@ public class UserPvPEvent implements Listener {
                     }
                 }
             }
-
-
-
-
-            if(icmAttacker.getFightingKit() != null)
-            {
+            if (icmAttacker.getFightingKit() != null) {
                 icmAttacker.getFightingKit().whenAttacking(e);
-                if(e.getDamager() instanceof Snowball)
-                {
+                if (e.getDamager() instanceof Snowball)
                     icmAttacker.getFightingKit().whenHittingPlayerWithSnowBall(e);
-                }
-                else if(e.getDamager() instanceof Arrow)
-                {
+                else if (e.getDamager() instanceof Arrow)
                     icmAttacker.getFightingKit().whenArrowHit(e);
-                }
             }
-            if(icmVictim.getFightingKit() != null)
+            if (icmVictim.getFightingKit() != null)
                 icmVictim.getFightingKit().whenGetHit(e);
-
-
-
-
             icmVictim.setCombatTag();
             icmAttacker.setCombatTag();
-        }
-        else
-        {
-            if(!(e.getDamager() instanceof Player))
-            {
+        } else {
+            if (!(e.getDamager() instanceof Player)) {
                 if(!(e.getDamager() instanceof Projectile))
-                {
                     return;
-                }
-                else
-                {
-                    if(!(((Projectile) e.getDamager()).getShooter() instanceof Player))
-                    {
-                        return;
-                    }
-                }
+                else if (!(((Projectile) e.getDamager()).getShooter() instanceof Player))
+                    return;
             }
-
             Player attacker = null;
-
-            if(e.getDamager() instanceof Player)
+            if (e.getDamager() instanceof Player)
                 attacker = (Player) e.getDamager();
-            else if(e.getDamager() instanceof Projectile)
+            else if (e.getDamager() instanceof Projectile)
                 attacker = (Player) ((Projectile) e.getDamager()).getShooter();
-
-            if(attacker == null)
+            if (attacker == null)
                 return;
 
             ICMPlayer icmAttacker = playerLoader.getICMByPlayer(attacker);
-            if(icmAttacker == null)
+            if (icmAttacker == null)
                 return;
             ArrayList<ICMZone> zones = zoneLoader.getIcmZones();
-            if(!zones.isEmpty())
-            {
-                for(ICMZone zone : zones)
-                {
-                    if(zone.isInsideZone(attacker))
-                    {
+            if (!zones.isEmpty())
+                for (ICMZone zone : zones)
+                    if (zone.isInsideZone(attacker)) {
+                        if (zone.isCanEntityDamage())
+                            continue;
+                        attacker.sendMessage(PvPBox.getConfig.zone_can_use);
+                        e.setCancelled(true);
+                        return;
+                    } else if(zone.isInsideZone(e.getEntity())) {
                         if(zone.isCanEntityDamage())
                             continue;
                         attacker.sendMessage(PvPBox.getConfig.zone_can_use);
                         e.setCancelled(true);
                         return;
                     }
-                    else if(zone.isInsideZone(e.getEntity()))
-                    {
-                        if(zone.isCanEntityDamage())
-                            continue;
-                        attacker.sendMessage(PvPBox.getConfig.zone_can_use);
-                        e.setCancelled(true);
-                        return;
-                    }
-                }
-            }
-
         }
     }
-
-
 }

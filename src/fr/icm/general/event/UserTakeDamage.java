@@ -20,33 +20,19 @@ public class UserTakeDamage implements Listener {
     @EventHandler
     public void userTakeDamageEvent(EntityDamageEvent e)
     {
-        if(e.getEntity() instanceof Player)
-        {
+        if (e.getEntity() instanceof Player) {
             Player victim = (Player) e.getEntity();
             ICMPlayer icmPlayer = playerLoader.getICMByPlayer(victim);
-            if(icmPlayer == null)
+            if (icmPlayer == null)
                 return;
             ArrayList<ICMZone> zones = zoneLoader.getIcmZones();
-            if(!zones.isEmpty())
-            {
-                for(ICMZone zone : zones)
-                {
-                    if(zone.isInsideZone(victim))
-                    {
-                        if(zone.isInvicible())
-                        {
+            if (!zones.isEmpty())
+                for (ICMZone zone : zones)
+                    if (zone.isInsideZone(victim))
+                        if (zone.isInvicible()) {
                             e.setCancelled(true);
                             return;
                         }
-                    }
-                }
-            }
-
-
-
         }
     }
-
-
-
 }

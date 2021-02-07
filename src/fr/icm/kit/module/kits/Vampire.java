@@ -21,9 +21,9 @@ public class Vampire extends Kit{
     Tier[] tier = new Tier[3];
 
     public Vampire() {
-        super("Vampire", 30, true, false);
+        super("vampire", 30, true, false);
 
-        Presentation p = new Presentation("§cKit Vampire", Arrays.asList("Je suce le sang de mes victimes !"), Material.REDSTONE);
+        Presentation p = new Presentation("§6» Kit Vampire", Arrays.asList("Je suce le sang de mes victimes !"), Material.REDSTONE);
 
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
         tier[1] = new Tier(2, 100, tierOne(), getKitName(), p, 0);

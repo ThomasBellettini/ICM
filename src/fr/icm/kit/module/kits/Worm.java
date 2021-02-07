@@ -16,7 +16,7 @@ public class Worm extends Kit {
     public Worm() {
         super("worm", 33, false, false);
 
-        Presentation p = new Presentation("§cWorm", Arrays.asList("J'aime la terre"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Worm", Arrays.asList("J'aime la terre"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
 
         super.tier = this.tier;

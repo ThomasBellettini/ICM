@@ -25,7 +25,7 @@ public class Terrorist extends Kit {
     public Terrorist() {
         super("terroriste", 26, false, false);
 
-        Presentation p = new Presentation("§cTerroriste", Arrays.asList("Boom"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Terroriste", Arrays.asList("Boom"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 10);
         tier[1] = new Tier(2, 100, tierTwo(), getKitName(), p, 10);
         tier[2] = new Tier(3, 300, tierThree(), getKitName(), p, 10);

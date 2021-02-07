@@ -18,7 +18,7 @@ public class Iceman extends Kit {
     public Iceman() {
         super("iceman", 13, false, false);
 
-        Presentation p = new Presentation("§cIceman", Arrays.asList("J'adore le froid"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Iceman", Arrays.asList("J'adore le froid"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
 
         super.tier = this.tier;

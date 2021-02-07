@@ -10,32 +10,34 @@ import org.bukkit.entity.Player;
 
 public class Reflections {
 
-
-    public void setValue(Object obj,String name,Object value){
-        try{
+    public void setValue(Object obj,String name,Object value)
+    {
+        try {
             Field field = obj.getClass().getDeclaredField(name);
             field.setAccessible(true);
             field.set(obj, value);
-        }catch(Exception e){}
+        } catch(Exception e){ }
     }
 
-    public Object getValue(Object obj,String name){
-        try{
+    public Object getValue(Object obj,String name)
+    {
+        try {
             Field field = obj.getClass().getDeclaredField(name);
             field.setAccessible(true);
             return field.get(obj);
-        }catch(Exception e){}
+        } catch(Exception e){ }
         return null;
     }
 
-    public void sendPacket(Packet<?> packet,Player player){
+    public void sendPacket(Packet<?> packet,Player player)
+    {
         ((CraftPlayer)player).getHandle().playerConnection.sendPacket(packet);
     }
 
-    public void sendPacket(Packet<?> packet){
-        for(Player player : Bukkit.getOnlinePlayers()){
+    public void sendPacket(Packet<?> packet)
+    {
+        for(Player player : Bukkit.getOnlinePlayers())
             sendPacket(packet,player);
-        }
     }
 
 }

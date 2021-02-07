@@ -16,7 +16,7 @@ public class BlackBeard extends Kit {
     Tier[] tier = new Tier[1];
 
     public BlackBeard() {
-        super("barbenoir", 3, false, false);
+        super("barbenoire", 3, false, false);
 
         Presentation p = new Presentation("§6» Kit Barbe Noire", Arrays.asList(" "
                 , " "

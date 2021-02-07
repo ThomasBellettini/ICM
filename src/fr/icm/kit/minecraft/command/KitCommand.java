@@ -6,6 +6,7 @@ import fr.icm.entity.utils.PlayerLoader;
 import fr.icm.kit.minecraft.gui.ICMGuiKit;
 import fr.icm.kit.minecraft.gui.enumeration.ICMGuiType;
 import fr.icm.kit.module.utils.KitLoader;
+import fr.icm.rank.module.utils.RankEnum;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -20,22 +21,15 @@ public class KitCommand implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] args)
     {
-
-        if(cmd.getName().equalsIgnoreCase("kit"))
-        {
-
-            if(!(sender instanceof Player))
-            {
+        if (cmd.getName().equalsIgnoreCase("kit")) {
+            if (!(sender instanceof Player)) {
                 sender.sendMessage("§c[!] Erreur, cette commande n'est utilisable que par les joueurs !");
                 return true;
             }
-
-            if(sender.isOp())
-            {
+            if (playerLoader.getICMByName(sender.getName()).getRank() == RankEnum.ADMINISTRATOR) {
+                ((Player) sender).openInventory(guiKit.setGui(ICMGuiType.GUI_MAIN, playerLoader.getICMByName(sender.getName()), 1));
+                return true;
             }
-
-
-
         }
         return false;
     }

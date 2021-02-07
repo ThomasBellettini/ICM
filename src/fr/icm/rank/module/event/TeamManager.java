@@ -94,15 +94,11 @@ public class TeamManager {
         teamHashMap.put(RankEnum.GUEST, guest);
         teamHashMap.put(RankEnum.VIP, VIP);
         teamHashMap.put(RankEnum.PLAYER, player);
-
     }
-
     public Scoreboard getScoreboard() {
         return scoreboard;
     }
-
     public HashMap<RankEnum, Team> getTeamHashMap() {
         return teamHashMap;
     }
-
 }

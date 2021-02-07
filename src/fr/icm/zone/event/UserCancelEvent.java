@@ -18,19 +18,16 @@ public class UserCancelEvent {
     {
         Player p = e.getPlayer();
         ICMPlayer icmPlayer = playerLoader.getICMByPlayer(p);
-        if(icmPlayer == null) return false;
-        if(e.getMessage().equalsIgnoreCase("cancel"))
-        {
-            if(icmPlayer.getZone_create() != null)
-            {
+        if (icmPlayer == null)
+            return false;
+        if (e.getMessage().equalsIgnoreCase("cancel"))
+            if(icmPlayer.getZone_create() != null) {
                 e.setCancelled(true);
                 icmPlayer.setZone_create(null);
                 if(icmPlayer.getLoc_zone() !=null) icmPlayer.setLoc_zone(null);
                 p.sendMessage("§7[§6ICM§7] §cVous venez de cancel la création de la zone !");
                 return true;
             }
-        }
         return false;
     }
-
 }

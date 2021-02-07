@@ -25,7 +25,7 @@ public class Switcher extends Kit {
     public Switcher() {
         super("switcher", 24, false, false);
 
-        Presentation p = new Presentation("§cSwitcher", Arrays.asList("Switch !"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Switcher", Arrays.asList("Switch !"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 5);
         tier[1] = new Tier(2, 100, tierTwo(), getKitName(), p, 5);
         tier[2] = new Tier(3, 300, tierThree(), getKitName(), p, 5);

@@ -25,42 +25,42 @@ public class PacketReader {
     Channel channel;
     int id;
 
-    public PacketReader(Player player) {
+    public PacketReader(Player player)
+    {
         this.player = player;
         this.id = (int)Math.ceil(Math.random() * 1000) + 2000;
     }
 
-    public void inject(){
+    public void inject()
+    {
         CraftPlayer cPlayer = (CraftPlayer)this.player;
         channel = cPlayer.getHandle().playerConnection.networkManager.channel;
         channel.pipeline().addAfter("decoder", "PacketInjector" + id,  new MessageToMessageDecoder<Packet<?>>() {@Override protected void decode(ChannelHandlerContext arg0, Packet<?> packet,List<Object> arg2) throws Exception {arg2.add(packet);readPacket(packet);}});
     }
 
-    public void uninject(){
-        if(channel.pipeline().get("PacketInjector" + id) != null){
+    public void uninject()
+    {
+        if (channel.pipeline().get("PacketInjector" + id) != null)
             channel.pipeline().remove("PacketInjector" + id);
-        }
     }
 
-
-    public void readPacket(Packet<?> packet){
-        if(packet.getClass().getSimpleName().equalsIgnoreCase("PacketPlayInUseEntity")){
+    public void readPacket(Packet<?> packet)
+    {
+        if (packet.getClass().getSimpleName().equalsIgnoreCase("PacketPlayInUseEntity")) {
             int id = (Integer)getValue(packet, "a");
-
-            if(PvPBox.getKitNPC.getEntityID() == id){
-                if(getValue(packet, "action").toString().equalsIgnoreCase("INTERACT")){
+            if (PvPBox.getKitNPC.getEntityID() == id){
+                if (getValue(packet, "action").toString().equalsIgnoreCase("INTERACT")) {
                     ICMPlayer icmPlayer = PvPBox.getPlayerLoader.getICMByPlayer(player);
-                    if(icmPlayer == null) return;
+                    if(icmPlayer == null)
+                        return;
                     player.openInventory(PvPBox.getGuiKit.setGui(ICMGuiType.GUI_MAIN, icmPlayer, 1));
-                }
-                else if(getValue(packet, "action").toString().equalsIgnoreCase("ATTACK"))
-                {
+                } else if (getValue(packet, "action").toString().equalsIgnoreCase("ATTACK")) {
                     ICMPlayer icmPlayer = PvPBox.getPlayerLoader.getICMByPlayer(player);
-                    if(icmPlayer == null) return;
+                    if (icmPlayer == null)
+                        return;
                     player.openInventory(PvPBox.getGuiKit.setGui(ICMGuiType.GUI_MAIN, icmPlayer, 1));
                 }
             }
-
         }
         /**
         else if(packet.getClass().getSimpleName().equalsIgnoreCase("PacketPlayInUpdateSign"))
@@ -84,26 +84,25 @@ public class PacketReader {
                 player.sendMessage("§cPlease Specify a Valid playerName !");
             }
             return;
-        }
-         **/
+        }**/
     }
 
-
-    public void setValue(Object obj,String name,Object value){
-        try{
+    public void setValue(Object obj,String name,Object value)
+    {
+        try {
             Field field = obj.getClass().getDeclaredField(name);
             field.setAccessible(true);
             field.set(obj, value);
-        }catch(Exception e){}
+        } catch(Exception e){ }
     }
 
-    public Object getValue(Object obj,String name){
-        try{
+    public Object getValue(Object obj,String name)
+    {
+        try {
             Field field = obj.getClass().getDeclaredField(name);
             field.setAccessible(true);
             return field.get(obj);
-        }catch(Exception e){}
+        } catch(Exception e){ }
         return null;
     }
-
 }

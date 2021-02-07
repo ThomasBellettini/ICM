@@ -19,7 +19,7 @@ public class Viking extends Kit {
     public Viking() {
         super("viking", 31, false, false);
 
-        Presentation p = new Presentation("§cViking", Arrays.asList("je combat pour aller au Vahlala"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Viking", Arrays.asList("je combat pour aller au Vahlala"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
         tier[1] = new Tier(2, 100, tierTwo(), getKitName(), p, 0);
         tier[2] = new Tier(3, 300, tierThree(), getKitName(), p, 0);

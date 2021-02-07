@@ -22,10 +22,8 @@ public class EventMovement implements Listener {
     {
         Player damager = e.getPlayer();
         ICMPlayer icmPlayerDamager = playerLoader.getICMByPlayer(damager);
-
         if(icmPlayerDamager == null)
             return;
-
         if(!icmPlayerDamager.isFighting())
             return;
         icmPlayerDamager.getFightingKit().whenSneaking(e);
@@ -36,14 +34,11 @@ public class EventMovement implements Listener {
     {
         Player damager = e.getPlayer();
         ICMPlayer icmPlayerDamager = playerLoader.getICMByPlayer(damager);
-
         if(icmPlayerDamager == null)
             return;
-
         if(!icmPlayerDamager.isFighting())
             return;
         if(new Location(e.getTo().getWorld(), e.getTo().getX(), e.getTo().getY() -1, e.getTo().getZ()).getBlock().getType() == Material.SPONGE)
             icmPlayerDamager.getFightingKit().whenWalkingOnSponge(e);
     }
-
 }

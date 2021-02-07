@@ -28,23 +28,19 @@ public class UserSendChatMessage implements Listener {
     @EventHandler (priority = EventPriority.LOWEST)
     public void onChat(AsyncPlayerChatEvent e)
     {
-        if(e.isCancelled()) return;
+        if (e.isCancelled())
+            return;
         ICMPlayer icmUser = PvPBox.getPlayerLoader.getICMByPlayer(e.getPlayer());
-        if(icmUser == null)
+        if (icmUser == null)
             return;
         e.setCancelled(true);
-
-        if(UserCancelEvent.UserCancelEvent(e))
-        {
+        if (UserCancelEvent.UserCancelEvent(e))
             return;
-        }
 
-        if(e.getMessage().startsWith("*") && PvPBox.getPartyLoader.getPartiesWithMember(icmUser) != null)
-        {
+        if (e.getMessage().startsWith("*") && PvPBox.getPartyLoader.getPartiesWithMember(icmUser) != null) {
             String msg = e.getMessage().substring(1);
             ICMParty party = PvPBox.getPartyLoader.getPartiesWithMember(icmUser);
-            for(Player p : party.convertArrayPlayer())
-            {
+            for (Player p : party.convertArrayPlayer()) {
                 TextComponent textComponent;
                 textComponent = new TextComponent("§7[§9Groupe§7] " + e.getPlayer().getDisplayName() + " §b» ");
                 TextComponent msgq =  new TextComponent(msg.replace("&", "§"));
@@ -55,15 +51,12 @@ public class UserSendChatMessage implements Listener {
             }
             return;
         }
-        for(Player p : Bukkit.getOnlinePlayers())
-        {
+        for (Player p : Bukkit.getOnlinePlayers()) {
             ICMPlayer icmPlayer = PvPBox.getPlayerLoader.getICMByPlayer(p);
-            if(icmPlayer == null)
-            {
+            if (icmPlayer == null) {
                 icmPlayer = new ICMPlayer(p.getName(), 0, 0, 0, p.getAddress().getHostString());
                 PvPBox.getPlayerLoader.register(icmPlayer);
             }
-
             String format;
             String formatadmin =  "§eStatistique de " + e.getPlayer().getName() + " :" +
                 "\n \n     §6Kill(s) : " + icmUser.getKill() +
@@ -82,16 +75,13 @@ public class UserSendChatMessage implements Listener {
                     "\n     §6KillStreak : §cWIP"+
                     "\n \n§a§oClique sur le message pour envoyez un DM à §e" + e.getPlayer().getName();
             String msg = e.getMessage();
+
             ArrayList<RankEnum> staff = new ArrayList<>(Arrays.asList(RankEnum.ADMINISTRATOR, RankEnum.MODERATOR, RankEnum.RESPONSABLE, RankEnum.HELPER, RankEnum.STAFF));
-
             if(staff.contains(icmUser.getRank()))
-            {
                 msg = e.getMessage().replace("&", "§");
-            }
-            TextComponent textComponent;
 
-            if(icmPlayer.getRank() == RankEnum.ADMINISTRATOR)
-            {
+            TextComponent textComponent;
+            if (icmPlayer.getRank() == RankEnum.ADMINISTRATOR) {
                 textComponent = new TextComponent(e.getPlayer().getDisplayName() + " §7» ");
                 TextComponent msgq =  new TextComponent(msg);
                 msgq.setColor(icmUser.getRank().getColor());
@@ -99,28 +89,18 @@ public class UserSendChatMessage implements Listener {
                 textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(formatadmin).create()));
                 textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/w " + e.getPlayer().getName() + " "));
 
-            }
-            else
-            {
-
+            } else {
                 textComponent = new TextComponent(e.getPlayer().getDisplayName() + " §7» ");
                 TextComponent msgq =  new TextComponent(msg);
                 msgq.setColor(icmUser.getRank().getColor());
                 textComponent.addExtra(msgq);
                 textComponent.setHoverEvent(new HoverEvent(HoverEvent.Action.SHOW_TEXT, new ComponentBuilder(formatAll).create()));
                 textComponent.setClickEvent(new ClickEvent(ClickEvent.Action.SUGGEST_COMMAND, "/w " + e.getPlayer().getName() + " "));
-
             }
-
             p.spigot().sendMessage(textComponent);
-
-
-
-
         }
-
-
     }
+
     private String clickableMessage(String value, String hover)
     {
         return "{text:\"" + value + "\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"" + hover + "\"}}";
@@ -130,5 +110,4 @@ public class UserSendChatMessage implements Listener {
     {
         return "{text:\"" + value + "\",\"hoverEvent\":{\"action\":\"show_text\",\"value\":\"" + hover + "\"},clickEvent:{action:\"" + type + "\",value:\"" + execute + "\"}}";
     }
-
 }

@@ -24,21 +24,14 @@ public class EventEntity implements Listener {
     {
         if(e.getEntity() == null || e.getEntity().getKiller() == null)
             return;
-
         Player damager = e.getEntity().getKiller();
         ICMPlayer icmPlayerUser = playerLoader.getICMByPlayer(damager);
-
-        if(icmPlayerUser == null)
-        {
+        if (icmPlayerUser == null) {
             icmPlayerUser = new ICMPlayer(damager.getName(), 0, 0, 0, "D");
             playerLoader.register(icmPlayerUser);
         }
-
-        if(!icmPlayerUser.isFighting())
-        {
+        if (!icmPlayerUser.isFighting())
             return;
-        }
-
         icmPlayerUser.getFightingKit().whenKillingEntity(e);
     }
 
@@ -47,7 +40,6 @@ public class EventEntity implements Listener {
     {
         if(e.getEntity() == null || e.getDismounted() == null)
             return;
-
         if(!(e.getEntity() instanceof Player))
             return;
         if(!(e.getDismounted() instanceof Horse))
@@ -55,63 +47,45 @@ public class EventEntity implements Listener {
 
         Player rider = (Player) e.getEntity();
         ICMPlayer icmPlayerUser = playerLoader.getICMByPlayer(rider);
-
-        if(icmPlayerUser == null)
-        {
+        if (icmPlayerUser == null) {
             icmPlayerUser = new ICMPlayer(rider.getName(), 0, 0, 0, "D");
             playerLoader.register(icmPlayerUser);
         }
-
-        if(!icmPlayerUser.isFighting())
-        {
+        if (!icmPlayerUser.isFighting()) {
             return;
         }
-
         icmPlayerUser.getFightingKit().whenDismount(e);
     }
 
     @EventHandler
     public void onMountGetDamaged(EntityDamageByEntityEvent e)
     {
-
-        if(e.getEntity() == null || !(e.getDamager() instanceof Player))
+        if (e.getEntity() == null || !(e.getDamager() instanceof Player))
             return;
-
         Player damager = (Player) e.getDamager();
         ICMPlayer icmPlayerDamager = playerLoader.getICMByPlayer(damager);
-
-        if(icmPlayerDamager == null)
-        {
+        if (icmPlayerDamager == null) {
             icmPlayerDamager = new ICMPlayer(damager.getName(), 0, 0, 0, "D");
             playerLoader.register(icmPlayerDamager);
         }
-        if(!icmPlayerDamager.isFighting())
-        {
+        if (!icmPlayerDamager.isFighting())
             return;
-        }
-
-        if(e.getEntity().getPassenger() != null && e.getEntity().getPassenger() instanceof Player && e.getEntity() instanceof Horse)
-        {
+        if (e.getEntity().getPassenger() != null && e.getEntity().getPassenger() instanceof Player && e.getEntity() instanceof Horse)
             icmPlayerDamager.getFightingKit().whenHorseHitting(e);
-        }
-
     }
 
     @EventHandler
     public void whenPlayerFalling(EntityDamageEvent e)
     {
-        if(e.getCause() != EntityDamageEvent.DamageCause.FALL || !(e.getEntity() instanceof Player))
+        if (e.getCause() != EntityDamageEvent.DamageCause.FALL || !(e.getEntity() instanceof Player))
             return;
         Player damager = (Player) e.getEntity();
         ICMPlayer icmPlayerDamager = playerLoader.getICMByPlayer(damager);
-
-        if(icmPlayerDamager == null)
-        {
+        if (icmPlayerDamager == null) {
             icmPlayerDamager = new ICMPlayer(damager.getName(), 0, 0, 0, "D");
             playerLoader.register(icmPlayerDamager);
         }
-
-        if(!icmPlayerDamager.isFighting())
+        if (!icmPlayerDamager.isFighting())
             return;
         icmPlayerDamager.getFightingKit().whenFalling(e);
     }

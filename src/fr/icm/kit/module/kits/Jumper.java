@@ -19,7 +19,7 @@ public class Jumper extends Kit {
     public Jumper() {
         super("jumper", 14, false, false);
 
-        Presentation p = new Presentation("§cJumper", Arrays.asList("J'use à fond mes perles"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Jumper", Arrays.asList("J'use à fond mes perles"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
         tier[1] = new Tier(2, 100, tierTwo(), getKitName(), p, 0);
         tier[2] = new Tier(3, 300, tierThree(), getKitName(), p, 0);

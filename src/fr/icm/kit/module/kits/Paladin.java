@@ -18,7 +18,7 @@ public class Paladin extends Kit {
     public Paladin() {
         super("paladin", 18, false, false);
 
-        Presentation p = new Presentation("§cPaladin", Arrays.asList("Je me bat pour l'inquisition"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Paladin", Arrays.asList("Je me bat pour l'inquisition"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
 
         super.tier = this.tier;

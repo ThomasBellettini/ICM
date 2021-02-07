@@ -24,56 +24,42 @@ public class CommandZone implements CommandExecutor {
     ZoneLoader zoneLoader = PvPBox.getZoneLoader;
 
     @Override
-    public boolean onCommand(CommandSender sender, Command command, String s, String[] args) {
-
-        if(sender instanceof Player)
-        {
+    public boolean onCommand(CommandSender sender, Command command, String s, String[] args)
+    {
+        if (sender instanceof Player) {
             Player p = (Player)sender;
             ICMPlayer icmPlayer = PvPBox.getPlayerLoader.getICMByPlayer(p);
-            if(icmPlayer == null)
+            if (icmPlayer == null)
                 return true;
-            if(icmPlayer.getRank() != RankEnum.ADMINISTRATOR)
-            {
+            if (icmPlayer.getRank() != RankEnum.ADMINISTRATOR) {
                 p.sendMessage("§7[§c!§7]§c Erreur, vous n'avez pas les privileges necessaires ! §7(§4<ADMINISTRATOR§7)");
                 return false;
             }
+
             ArrayList<ICMZone> icmZones = new ArrayList<>(zoneLoader.getIcmZones());
-            if(args.length == 2)
-            {
+            if (args.length == 2) {
                 String zoneName = args[1];
-                switch (args[0])
-                {
+                switch (args[0]) {
                     case "create":
-                        if(!icmZones.isEmpty())
-                        {
-                            for(ICMZone icm : icmZones)
-                            {
-                                if(icm.getName().equalsIgnoreCase(zoneName))
-                                    {
+                        if (!icmZones.isEmpty())
+                            for (ICMZone icm : icmZones)
+                                if (icm.getName().equalsIgnoreCase(zoneName)) {
                                         p.sendMessage("§7[§c!§7] §cErreur, il n'existe déjà une zone avec ce nom !");
                                         return true;
-                                    }
-                            }
-                        }
-                        if(icmPlayer.getZone_create() == null)
-                        {
+                                }
+                        if (icmPlayer.getZone_create() == null) {
                             icmPlayer.setZone_create(new ICMZone(zoneName));
                             p.sendMessage("§7[§6ICM§7] §aVous venez de lancer la création d'une zone, merci de toucher deux blocs pour définir les limites de la zone !");
-                        }
-                        else
+                        } else
                             p.sendMessage("§7[§c!§7] §cVous êtes déjà en train de crée une zone !");
-
-
                         break;
                     case "edit": case "modifier":
-                        if(icmZones.isEmpty())
-                        {
+                        if (icmZones.isEmpty()) {
                             p.sendMessage("§7[§c!§7] §cErreur, il n'existe aucune zone load sur le serveur !");
                             return true;
                         }
                         icmZones.removeIf((ICMZone zone) -> !zone.getName().equalsIgnoreCase(zoneName));
-                        if(icmZones.isEmpty())
-                        {
+                        if (icmZones.isEmpty()) {
                             p.sendMessage("§7[§c!§7] §cErreur, aucune zone ne porte ce nom !");
                             return true;
                         }
@@ -81,14 +67,12 @@ public class CommandZone implements CommandExecutor {
                         p.openInventory(getZoneInventory(zone));
                         break;
                     case "remove" : case "delete": case "supprimer":
-                        if(icmZones.isEmpty())
-                        {
+                        if (icmZones.isEmpty()) {
                             p.sendMessage("§7[§c!§7] §cErreur, il n'existe aucune zone load sur le serveur !");
                             return true;
                         }
                         icmZones.removeIf((ICMZone zones) -> !zones.getName().equalsIgnoreCase(zoneName));
-                        if(icmZones.isEmpty())
-                        {
+                        if (icmZones.isEmpty()) {
                             p.sendMessage("§7[§c!§7] §cErreur, aucune zone ne porte ce nom !");
                             return true;
                         }
@@ -98,12 +82,8 @@ public class CommandZone implements CommandExecutor {
                 }
             }
         }
-
-
         return false;
     }
-
-
 
     private Inventory getConfirmRemoveInventory(ICMZone icmZone)
     {
@@ -126,12 +106,9 @@ public class CommandZone implements CommandExecutor {
         cencel_meta.setLore(Arrays.asList(" ", "     §eSi vous annulez la suppression de zone,", "     §eAucune données ne sera modifiée !", " "));
         cancel.setItemMeta(cencel_meta);
 
-
         inventory.setItem(0, nothing);
         inventory.setItem(1, confirm);
-
         inventory.setItem(2, nothing);
-
         inventory.setItem(3, cancel);
         inventory.setItem(4, nothing);
         return inventory;
@@ -187,198 +164,146 @@ public class CommandZone implements CommandExecutor {
         inventory.setItem(45, nothing);
         inventory.setItem(53, nothing);
 
-
         ItemStack negative = new ItemStack(Material.INK_SACK, 1, (short)1);
         ItemMeta meta = negative.getItemMeta();
         meta.setLore(Arrays.asList(" ", "     §eSi tu cliques sur cette item,", "     §etu §aactiveras§e la fonctionalité !", " "));
-
 
         ItemStack positive = new ItemStack(Material.INK_SACK, 1, (short)10);
         ItemMeta positive_meta = positive.getItemMeta();
         positive_meta.setLore(Arrays.asList(" ", "     §eSi tu cliques sur cette item,", "     §etu §cdésactiveras§e la fonctionalité !", " "));
 
-        if(z.isCanPvp())
-        {
+        if (z.isCanPvp()) {
             positive_meta.setDisplayName("§ePVP");
             positive.setItemMeta(positive_meta);
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§ePVP");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isCanBuild())
-        {
+        if (z.isCanBuild()) {
             positive_meta.setDisplayName("§eBUILD");
             positive.setItemMeta(positive_meta);
-
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eBUILD");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isCanDestroy())
-        {
+        if (z.isCanDestroy()) {
             positive_meta.setDisplayName("§eDESTROY");
             positive.setItemMeta(positive_meta);
-
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eDESTROY");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isCanEntityDamage())
-        {
+        if (z.isCanEntityDamage()) {
             positive_meta.setDisplayName("§eENTITY DAMAGE");
             positive.setItemMeta(positive_meta);
-
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eENTITY DAMAGE");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isCanInteract())
-        {
+        if (z.isCanInteract()) {
             positive_meta.setDisplayName("§eINTERACT");
             positive.setItemMeta(positive_meta);
 
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eINTERACT");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isCanGrief())
-        {
+        if (z.isCanGrief()) {
             positive_meta.setDisplayName("§eMOB GRIEFING");
             positive.setItemMeta(positive_meta);
-
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eMOB GRIEFING");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isCanUsePower())
-        {
+        if (z.isCanUsePower()) {
             positive_meta.setDisplayName("§eCAN USE KIT POWER");
             positive.setItemMeta(positive_meta);
-
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eCAN USE KIT POWER");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isCanMobSpawn())
-        {
+        if (z.isCanMobSpawn()) {
             positive_meta.setDisplayName("§eMOB SPAWN");
             positive.setItemMeta(positive_meta);
-
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eMOB SPAWN");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isCanViewOtherPlayer())
-        {
+        if (z.isCanViewOtherPlayer()) {
             positive_meta.setDisplayName("§eSEE OTHER PLAYER");
             positive.setItemMeta(positive_meta);
 
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eSEE OTHER PLAYER");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isInvicible())
-        {
+        if (z.isInvicible()) {
             positive_meta.setDisplayName("§eINVINCIBLE");
             positive.setItemMeta(positive_meta);
 
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eINVINCIBLE");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isFoodLess())
-        {
+        if (z.isFoodLess()) {
             positive_meta.setDisplayName("§eFOODLESS");
             positive.setItemMeta(positive_meta);
-
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eFOODLESS");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
 
-        if(z.isCanInteractAtEntity())
-        {
+        if (z.isCanInteractAtEntity()) {
             positive_meta.setDisplayName("§eENTITY INTERACT");
             positive.setItemMeta(positive_meta);
-
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eENTITY INTERACT");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
-        if(z.isCanTeleport())
-        {
+
+        if (z.isCanTeleport()) {
             positive_meta.setDisplayName("§eTELEPORT");
             positive.setItemMeta(positive_meta);
-
             inventory.addItem(positive);
-        }
-        else
-        {
+        } else {
             meta.setDisplayName("§eTELEPORT");
             negative.setItemMeta(meta);
             inventory.addItem(negative);
         }
-
-
         return inventory;
     }
-
 }

@@ -20,30 +20,21 @@ public class UserUpdateEvent implements Listener {
     @EventHandler
     public void userUpdateEvent(FoodLevelChangeEvent e)
     {
-        if(e.getEntity() instanceof Player)
-        {
+        if (e.getEntity() instanceof Player) {
             Player player = (Player) e.getEntity();
             ICMPlayer icmPlayer = playerLoader.getICMByPlayer(player);
-            if(icmPlayer == null)
+            if (icmPlayer == null)
                     return;
             ArrayList<ICMZone> zones = zoneLoader.getIcmZones();
-            if(!zones.isEmpty())
-            {
-                for(ICMZone zone : zones)
-                {
-                    if(zone.isInsideZone(player))
-                    {
-                        if(zone.isFoodLess())
-                        {
-                            if(player.getFoodLevel() != 20)
+            if (!zones.isEmpty())
+                for (ICMZone zone : zones)
+                    if (zone.isInsideZone(player))
+                        if (zone.isFoodLess()) {
+                            if (player.getFoodLevel() != 20)
                                 player.setFoodLevel(20);
                             e.setCancelled(true);
                             return;
                         }
-                    }
-                }
-            }
         }
     }
-
 }

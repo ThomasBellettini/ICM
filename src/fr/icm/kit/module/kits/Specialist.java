@@ -20,7 +20,7 @@ public class Specialist extends Kit {
     public Specialist() {
         super("specialiste", 22, false, false);
 
-        Presentation p = new Presentation("§cSpécialiste", Arrays.asList("Je suis spécial ??"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Spécialiste", Arrays.asList("Je suis spécial ??"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
         tier[1] = new Tier(2, 100, tierTwo(), getKitName(), p, 0);
 

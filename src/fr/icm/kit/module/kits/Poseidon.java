@@ -18,7 +18,7 @@ public class Poseidon extends Kit {
     public Poseidon() {
         super("poseidon", 21, false, false);
 
-        Presentation p = new Presentation("§cPoséidon", Arrays.asList("Je suis le roi des mer et des océan"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Poséidon", Arrays.asList("Je suis le roi des mer et des océan"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
 
         super.tier = this.tier;

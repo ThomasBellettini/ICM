@@ -31,7 +31,6 @@ public class PartyLoader {
                     return icmParty;
         return null;
     }
-
     public ArrayList<ICMParty> getParties() {
         return parties;
     }

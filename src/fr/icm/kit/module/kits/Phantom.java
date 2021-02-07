@@ -21,7 +21,7 @@ public class Phantom extends Kit {
     public Phantom() {
         super("phantom", 19, false, false);
 
-        Presentation p = new Presentation("§cPhantom", Arrays.asList("Je vol"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Phantom", Arrays.asList("Je vol"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
         tier[1] = new Tier(2, 100, tierTwo(), getKitName(), p, 0);
         tier[2] = new Tier(3, 300, tierThree(), getKitName(), p, 0);

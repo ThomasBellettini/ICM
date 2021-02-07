@@ -11,7 +11,8 @@ public class Presentation {
     private List<String> description;
     private Material icon;
 
-    public Presentation(String name, List<String> description, Material icon) {
+    public Presentation(String name, List<String> description, Material icon)
+    {
         this.name = name;
         this.description = description;
         this.icon = icon;

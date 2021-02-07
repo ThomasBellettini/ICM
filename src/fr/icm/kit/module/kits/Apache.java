@@ -40,8 +40,8 @@ public class Apache extends Kit {
         super.tier = this.tier;
     }
 
-    private ArrayList<ItemStack> tierOne() {
-
+    private ArrayList<ItemStack> tierOne()
+    {
         ArrayList<ItemStack> stuff = new ArrayList<>();
 
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
@@ -79,8 +79,8 @@ public class Apache extends Kit {
         return stuff;
     }
 
-    private ArrayList<ItemStack> tierTwo() {
-
+    private ArrayList<ItemStack> tierTwo()
+    {
         ArrayList<ItemStack> stuff = new ArrayList<>();
 
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
@@ -104,7 +104,6 @@ public class Apache extends Kit {
         ItemMeta flechesMeta = fleches.getItemMeta();
         flechesMeta.setDisplayName("Flèches Explosives");
         fleches.setItemMeta(flechesMeta);
-
 
         //stuff.add(tomahawk);
         stuff.add(new ItemStack(Material.BOW));
@@ -119,8 +118,8 @@ public class Apache extends Kit {
         return stuff;
     }
 
-    private ArrayList<ItemStack> tierThree() {
-
+    private ArrayList<ItemStack> tierThree()
+    {
         ArrayList<ItemStack> stuff = new ArrayList<>();
 
         ItemStack boots = new ItemStack(Material.LEATHER_BOOTS);
@@ -144,7 +143,6 @@ public class Apache extends Kit {
         ItemMeta flechesMeta = fleches.getItemMeta();
         flechesMeta.setDisplayName("Flèches Explosives");
         fleches.setItemMeta(flechesMeta);
-
 
         //stuff.add(tomahawk x2);
         stuff.add(new ItemStack(Material.BOW));
@@ -161,14 +159,15 @@ public class Apache extends Kit {
 
 
 
-    public void whenArrowHit(EntityDamageByEntityEvent e) {
-        if(!(e.getEntity() instanceof Player))
+    public void whenArrowHit(EntityDamageByEntityEvent e)
+    {
+        if (!(e.getEntity() instanceof Player))
             return;
-
+        if (!(e.getDamager() instanceof Arrow))
+            return;
         Arrow arrow = (Arrow) e.getDamager();
         Player damager = (Player) arrow.getShooter();
         Player victim = (Player) e.getEntity();
-
         if (victim.getGameMode() != GameMode.SURVIVAL)
             return;
 
@@ -176,9 +175,7 @@ public class Apache extends Kit {
         ICMParty icmParty = PvPBox.getPartyLoader.getPartiesWithMember(icmPlayer);
         int kitLevel = icmPlayer.getKitLevel(this.getKitName());
 
-
-        if(icmPlayer.getCooldown() > 0)
-        {
+        if(icmPlayer.getCooldown() > 0) {
             Bukkit.getPlayer(icmPlayer.getName()).sendMessage("§c[!] Erreur tu es en cooldown pendant encore §6" + icmPlayer.getCooldown() + " §4secondes");
             return;
         }
@@ -187,75 +184,59 @@ public class Apache extends Kit {
         icmPlayer.setCooldown(tierKit.getCooldown());
 
         victim.sendMessage("§c[!] Une flèche explosive vous à touchez et explosera dans 3 secondes.");
+        arrow.setCustomName("§bExplosion dans §c3");
 
-        new BukkitRunnable()
-        {
+        new BukkitRunnable() {
             int radius = 5;
             int timer = 3;
 
             @Override
             public void run() {
-                if (timer <= 0)
-                {
-                    arrow.getWorld().playSound(e.getEntity().getLocation(), Sound.EXPLODE, 1, (float) 1);
-                    arrow.getWorld().playEffect(e.getEntity().getLocation(), Effect.EXPLOSION_LARGE, 1);
-
-                    arrow.setCustomName("§bBoom !");
+                if (timer <= 0) {
+                    arrow.getWorld().playSound(victim.getLocation(), Sound.EXPLODE, 1, 1);
+                    arrow.getWorld().playEffect(victim.getLocation(), Effect.EXPLOSION_LARGE, 1);
                     arrow.remove();
-
-                    while(radius > 0) {
+                    while (radius > 0) {
                         if (icmParty == null) {
-                            for (Entity p : e.getEntity().getNearbyEntities(radius, radius, radius)) {
-                                if (p.getName().equalsIgnoreCase(damager.getName())) {
-                                    continue;
-                                }
-
-                                if (p instanceof Player)
-                                {
-                                    if(p.isDead()) {
+                            for (Entity p : victim.getNearbyEntities(radius, radius, radius))
+                                if (p instanceof Player) {
+                                    Player pl = (Player) p;
+                                    if (pl == damager)
+                                        continue;
+                                    if (pl.isDead())
+                                        continue;
+                                    if (pl.getHealth() - 1 <= 0) {
+                                        pl.setHealth(0);
                                         continue;
                                     }
-                                    if(((Player) p).getHealth() - 1 <= 0) {
-                                        ((Player) p).setHealth(0);
-                                        continue;
-                                    }
-                                    ((Player) p).damage(0);
-                                    ((Player) p).setHealth(((Player) p).getHealth() - 1);
+                                    pl.damage(0);
+                                    pl.setHealth(pl.getHealth() - 1);
                                 }
-                            }
                             radius--;
-
-                            if (e.getEntity().isDead() || e.getEntity() == damager)
+                            if (victim.isDead() || victim == damager)
                                 continue;
-                            if (((Player) e.getEntity()).getHealth() -1 <= 0)
-                            {
-                                ((Player) e.getEntity()).setHealth(0);
+                            if (victim.getHealth() - 1 <= 0) {
+                                victim.setHealth(0);
                                 continue;
                             }
-                            ((Player) e.getEntity()).damage(0);
-                            ((Player) e.getEntity()).setHealth(((Player) e.getEntity()).getHealth() - 1);
-                        }
-                        else {
-                            for (Entity p : e.getEntity().getNearbyEntities(radius, radius, radius)) {
-                                if(p instanceof  Player) {
-                                    Player w = (Player) p;
-                                    if (icmParty != null && icmParty.convertArrayPlayer().contains(w))
+                            victim.damage(0);
+                            victim.setHealth(victim.getHealth() - 1);
+                        } else {
+                            for (Entity p : victim.getNearbyEntities(radius, radius, radius)) {
+                                if (p instanceof  Player) {
+                                    Player pl = (Player) p;
+                                    if (icmParty != null && icmParty.convertArrayPlayer().contains(pl))
                                         continue;
-                                    if (p == damager) {
+                                    if (pl == damager)
+                                        continue;
+                                    if (pl.isDead())
+                                        continue;
+                                    if (pl.getHealth() - 1 <= 0) {
+                                        pl.setHealth(0);
                                         continue;
                                     }
-
-                                    if (p instanceof Player) {
-                                        if (p.isDead()) {
-                                            continue;
-                                        }
-                                        if (((Player) p).getHealth() - 1 <= 0) {
-                                            ((Player) p).setHealth(0);
-                                            continue;
-                                        }
-                                        ((Player) p).damage(0);
-                                        ((Player) p).setHealth(((Player) p).getHealth() - 1);
-                                    }
+                                    pl.damage(0);
+                                    pl.setHealth(pl.getHealth() - 1);
                                 }
                             }
                             radius--;
@@ -264,21 +245,19 @@ public class Apache extends Kit {
                                 continue;
                             if (e.getEntity().isDead() || e.getEntity() == damager)
                                 continue;
-                            if (((Player) e.getEntity()).getHealth() -1 <= 0)
-                            {
+                            if (((Player) e.getEntity()).getHealth() -1 <= 0) {
                                 ((Player) e.getEntity()).setHealth(0);
                                 continue;
                             }
                             ((Player) e.getEntity()).damage(0);
                             ((Player) e.getEntity()).setHealth(((Player) e.getEntity()).getHealth() - 1);
                         }
-
                     }
                     cancel();
                 }
-                if (timer > 0) {
+                if (timer > 0)
                     victim.sendMessage("§c[!]§b " + timer + " §cSeconde avant explosion.");
-                }
+                arrow.setCustomName("§bExplosion dans §c" + timer);
                 timer--;
             }
         }.runTaskTimer(PvPBox.getInstance, 0, 20L);

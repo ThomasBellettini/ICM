@@ -16,9 +16,9 @@ public class PoidsLourd extends Kit {
     Tier[] tier = new Tier[1];
 
     public PoidsLourd() {
-        super("poidslourd", 20, false, false);
+        super("poidslourds", 20, false, false);
 
-        Presentation p = new Presentation("§cPoids Lourds", Arrays.asList("Je suis gros"), Material.DIAMOND);
+        Presentation p = new Presentation("§6» Kit Poids Lourds", Arrays.asList("Je suis gros"), Material.DIAMOND);
         tier[0] = new Tier(1, 0, tierOne(), getKitName(), p, 0);
 
         super.tier = this.tier;

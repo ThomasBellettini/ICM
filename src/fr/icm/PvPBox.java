@@ -124,17 +124,14 @@ public class PvPBox extends JavaPlugin
 
         new ICMConfigMessageStorage().setup();
 
-        if(getConfig == null)
-        {
+        if (getConfig == null)
             getConfig = new ICMMessageConfig();
-        }
         savingSystem();
     }
 
     private void savingSystem()
     {
-        new BukkitRunnable()
-        {
+        new BukkitRunnable() {
             @Override
             public void run() {
                 getPlayerLoader.saveAll();
@@ -145,15 +142,12 @@ public class PvPBox extends JavaPlugin
     private void setupRankScoreboard()
     {
         getKitNPC.spawn();
-        for(Player p : Bukkit.getOnlinePlayers())
-        {
+        for (Player p : Bukkit.getOnlinePlayers()) {
             ICMPlayer icmPlayer = getPlayerLoader.getICMByPlayer(p);
-            if(icmPlayer == null)
-            {
+            if (icmPlayer == null) {
                 icmPlayer = new ICMPlayer(p.getName(), 0, 0, 0, p.getAddress().getHostName());
                 PvPBox.getPlayerLoader.register(icmPlayer);
             }
-
 
             ScoreboardSign scoreboardSign = new ScoreboardSign(PvPBox.getPlayerLoader.getPlayerByAPI(icmPlayer), "§6ICM Network");
             scoreboardSign.create();
@@ -161,22 +155,18 @@ public class PvPBox extends JavaPlugin
             scoreboardSign.setLine(1, "§6Coin(s) » §e" + icmPlayer.getCoins() + " €");
             scoreboardSign.setLine(2, "§6Kill(s) » §e" + icmPlayer.getKill());
             scoreboardSign.setLine(3, "§6Mort(s) » §e" + icmPlayer.getDeath());
-
             scoreboardSign.setLine(4, "§d ");
             scoreboardSign.setLine(5, "§6Kit » §e" + (icmPlayer.getFightingKit() != null ? icmPlayer.getFightingKit().getKitName() : "§cX"));
             scoreboardSign.setLine(6, "§6Cooldown » §e" + (icmPlayer.getCooldown() > 0 ? icmPlayer.getCooldown() + " seconde(s)" : "§cX"));
             scoreboardSign.setLine(7, "§6Combat » " + (icmPlayer.isCombatTag() ? icmPlayer.getCombatTag() + " seconde(s)" : "§cX"));
-
             scoreboardSign.setLine(8, "§7 ");
             scoreboardSign.setLine(9, "§eplay.icm-network.net §7(§a" + PvPBox.getInstance.getServer().getOnlinePlayers().size() + "§7)");
 
             PvPBox.getPlayerLoader.getSignMap().put(icmPlayer, scoreboardSign);
 
-
             Team m;
 
-            switch (p.getName())
-            {
+            switch (p.getName()) {
                 case "Shurisko": case "Zomboglace": case "Nastyco_": case "Orium57":
                 m = PvPBox.getTeamManager.getTeamHashMap().get(RankEnum.ADMINISTRATOR);
                 p.setDisplayName(RankEnum.ADMINISTRATOR.getPrefix() + p.getName());
@@ -211,11 +201,9 @@ public class PvPBox extends JavaPlugin
         location.setY(10);
         location.getBlock().setType(Material.SIGN_POST);
 
-
         for(Player pall : Bukkit.getOnlinePlayers())
-        {
             pall.setScoreboard(PvPBox.getTeamManager.getScoreboard());
-        }
+
         /**
         IChatBaseComponent iChatBaseComponent[] = { IChatBaseComponent.ChatSerializer.a("{\"text\": \"§6§lEnter Pseudo\"}"), IChatBaseComponent.ChatSerializer.a("{\"text\": \"§4§m-*---------*\"}"),
                 IChatBaseComponent.ChatSerializer.a("{\"text\": \"\"}"), IChatBaseComponent.ChatSerializer.a("{\"text\": \"\"}")};
@@ -240,21 +228,17 @@ public class PvPBox extends JavaPlugin
         getKitNPC.destroy();
         getPlayerLoader.saveAll();
 
-        if(!getPlayerLoader.getSignMap().isEmpty())
-       {
-            for(Player p : Bukkit.getOnlinePlayers())
-            {
-                if(packetReaderMap.containsKey(p))
-                {
+        if (!getPlayerLoader.getSignMap().isEmpty())
+            for (Player p : Bukkit.getOnlinePlayers()) {
+                if (packetReaderMap.containsKey(p)) {
                     PacketReader packetReader = PvPBox.getInstance.packetReaderMap.get(p);
                     packetReader.uninject();
                 }
                 ICMPlayer icmPlayer = getPlayerLoader.getICMByPlayer(p);
-                if(icmPlayer == null)
+                if (icmPlayer == null)
                     continue;
                 getPlayerLoader.getSignMap().get(icmPlayer).destroy();
             }
-       }
     }
 
     private void loadKit()
