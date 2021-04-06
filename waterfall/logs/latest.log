@@ -1,0 +1,48 @@
+[21:47:13] [main/INFO]: Using standard Java JCE cipher.
+[21:47:13] [main/INFO]: Using standard Java compressor.
+[21:47:13] [main/INFO]: Enabled Waterfall version git:Waterfall-Bootstrap:1.16-R0.5-SNAPSHOT:7395ab3:403
+[21:47:14] [main/INFO]: Discovered module: ModuleSpec(name=cmd_alert, file=modules\cmd_alert.jar, provider=JenkinsModuleSource())
+[21:47:14] [main/INFO]: Discovered module: ModuleSpec(name=cmd_find, file=modules\cmd_find.jar, provider=JenkinsModuleSource())
+[21:47:14] [main/INFO]: Discovered module: ModuleSpec(name=cmd_list, file=modules\cmd_list.jar, provider=JenkinsModuleSource())
+[21:47:14] [main/INFO]: Discovered module: ModuleSpec(name=cmd_send, file=modules\cmd_send.jar, provider=JenkinsModuleSource())
+[21:47:14] [main/INFO]: Discovered module: ModuleSpec(name=cmd_server, file=modules\cmd_server.jar, provider=JenkinsModuleSource())
+[21:47:14] [main/INFO]: Discovered module: ModuleSpec(name=reconnect_yaml, file=modules\reconnect_yaml.jar, provider=JenkinsModuleSource())
+[21:47:14] [main/INFO]: Attempting to update plugin from null to ModuleVersion(build=403, git=7395ab3)
+[21:47:14] [main/INFO]: Attempting to Jenkins download module cmd_alert v403
+[21:47:16] [main/INFO]: Download complete
+[21:47:16] [main/INFO]: Attempting to update plugin from null to ModuleVersion(build=403, git=7395ab3)
+[21:47:16] [main/INFO]: Attempting to Jenkins download module cmd_find v403
+[21:47:16] [main/INFO]: Download complete
+[21:47:16] [main/INFO]: Attempting to update plugin from null to ModuleVersion(build=403, git=7395ab3)
+[21:47:16] [main/INFO]: Attempting to Jenkins download module cmd_list v403
+[21:47:16] [main/INFO]: Download complete
+[21:47:16] [main/INFO]: Attempting to update plugin from null to ModuleVersion(build=403, git=7395ab3)
+[21:47:16] [main/INFO]: Attempting to Jenkins download module cmd_send v403
+[21:47:16] [main/INFO]: Download complete
+[21:47:16] [main/INFO]: Attempting to update plugin from null to ModuleVersion(build=403, git=7395ab3)
+[21:47:16] [main/INFO]: Attempting to Jenkins download module cmd_server v403
+[21:47:16] [main/INFO]: Download complete
+[21:47:16] [main/INFO]: Attempting to update plugin from null to ModuleVersion(build=403, git=7395ab3)
+[21:47:16] [main/INFO]: Attempting to Jenkins download module reconnect_yaml v403
+[21:47:16] [main/INFO]: Download complete
+[21:47:16] [main/INFO]: Loaded plugin reconnect_yaml version git:reconnect_yaml:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/INFO]: Loaded plugin cmd_find version git:cmd_find:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/INFO]: Loaded plugin cmd_server version git:cmd_server:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/INFO]: Loaded plugin cmd_alert version git:cmd_alert:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/INFO]: Loaded plugin cmd_send version git:cmd_send:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/INFO]: Loaded plugin cmd_list version git:cmd_list:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/WARN]: Forced host server pvp is not defined
+[21:47:16] [main/INFO]: Enabled plugin reconnect_yaml version git:reconnect_yaml:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/INFO]: Enabled plugin cmd_find version git:cmd_find:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/INFO]: Enabled plugin cmd_server version git:cmd_server:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/INFO]: Enabled plugin cmd_alert version git:cmd_alert:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/INFO]: Enabled plugin cmd_send version git:cmd_send:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:16] [main/INFO]: Enabled plugin cmd_list version git:cmd_list:1.16-R0.5-SNAPSHOT:7395ab3:403 by WaterfallMC
+[21:47:17] [Netty Boss IO Thread #0/INFO]: Listening on /0.0.0.0:25577
+[21:47:21] [Shutdown Thread/INFO]: Closing listener [id: 0xb4cb2c98, L:/0:0:0:0:0:0:0:0:25577]
+[21:47:21] [Shutdown Thread/INFO]: Closing pending connections
+[21:47:21] [Shutdown Thread/INFO]: Disconnecting 0 connections
+[21:47:22] [Shutdown Thread/INFO]: Saving reconnect locations
+[21:47:22] [Shutdown Thread/INFO]: Disabling plugins
+[21:47:22] [Shutdown Thread/INFO]: Closing IO threads
+[21:47:24] [Shutdown Thread/INFO]: Thank you and goodbye

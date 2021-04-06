@@ -1,0 +1,14 @@
+[
+  {
+    "uuid": "0a5933fd-f1db-4374-aaf4-e3110921dccb",
+    "name": "Orymashi",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  },
+  {
+    "uuid": "14033925-f859-30d7-98b1-7bb380db2ebd",
+    "name": "Shurisko",
+    "level": 4,
+    "bypassesPlayerLimit": false
+  }
+]

@@ -1,0 +1,9 @@
+{
+  "playerName": "Orymashi",
+  "kill": 0,
+  "death": 22,
+  "coins": 0,
+  "adresseIP": "127.0.0.1",
+  "levelPerKit": "{\n  \"grandpere\": 1,\n  \"switcher\": 1,\n  \"stomper\": 1,\n  \"apache\": 1,\n  \"mastodonte\": 1,\n  \"vampire\": 1,\n  \"hider\": 1,\n  \"maitredutemps\": 1,\n  \"terroriste\": 1,\n  \"cameleon\": 1,\n  \"specialiste\": 1,\n  \"heracles\": 1,\n  \"jumper\": 1,\n  \"poseidon\": 1,\n  \"viking\": 1,\n  \"roielfique\": 1,\n  \"iceman\": 1,\n  \"thor\": 1,\n  \"worm\": 1,\n  \"legendaire\": 1,\n  \"duelliste\": 1,\n  \"barbenoire\": 1,\n  \"monk\": 1,\n  \"poidslourds\": 1,\n  \"phantom\": 1,\n  \"urgal\": 1,\n  \"archer\": 1,\n  \"elfique\": 1,\n  \"fireman\": 1,\n  \"viper\": 1,\n  \"paladin\": 1,\n  \"eclaireur\": 1,\n  \"flash\": 1\n}",
+  "accessKit": "[\n  \"apache\",\n  \"thor\",\n  \"paladin\",\n  \"hider\",\n  \"eclaireur\",\n  \"duelliste\",\n  \"heracles\",\n  \"monk\"\n]"
+}
