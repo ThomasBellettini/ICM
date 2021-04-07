@@ -19,22 +19,18 @@ public class AccountManagerAccount implements CommandExecutor {
     @Override
     public boolean onCommand(CommandSender sender, Command cmd, String s, String[] arg) {
 
-        if (sender instanceof Player)
-        {
+        if (sender instanceof Player) {
             Player bPlayer = (Player)sender;
             ICMPlayer iPlayer = playerLoader.getICMByPlayer(bPlayer);
 
-            if (iPlayer.getRank() != RankEnum.ADMINISTRATOR)
-            {
+            if (iPlayer.getRank() != RankEnum.ADMINISTRATOR) {
                 bPlayer.sendMessage("§7[§c!§7] §4Error, you can't edit user account ! {<ADMINISTRATO}");
                 return true;
             }
-            if (arg.length == 1)
-            {
+            if (arg.length == 1) {
                 ICMPlayer icmPlayer = playerLoader.getICMByName(arg[0]);
 
-                if (icmPlayer == null)
-                {
+                if (icmPlayer == null) {
                     bPlayer.sendMessage("§7[§c!§7] §cError, Player was not found in our database !");
                     return true;
                 }

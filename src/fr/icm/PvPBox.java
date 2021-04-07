@@ -18,6 +18,7 @@ import fr.icm.kit.minecraft.utils.ICMNPC;
 import fr.icm.kit.minecraft.utils.network.PacketReader;
 import fr.icm.kit.module.event.*;
 import fr.icm.kit.module.kits.*;
+import fr.icm.kit.module.kits.admin.PvpKit;
 import fr.icm.kit.module.utils.KitLoader;
 import fr.icm.rank.module.event.TeamManager;
 import fr.icm.rank.module.utils.RankEnum;
@@ -278,6 +279,7 @@ public class PvPBox extends JavaPlugin
         getKitLoader.register(new Viking());
         getKitLoader.register(new Viper());
         getKitLoader.register(new Worm());
+        getKitLoader.register(new PvpKit());
     }
 }
 

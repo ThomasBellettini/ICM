@@ -214,10 +214,16 @@ public class AdminKitCommand implements CommandExecutor, Listener {
             if (icmVictim.getKitAccess().contains(k.getKitName())) {
                 icmVictim.getKitAccess().remove(k.getKitName());
                 e.getInventory().setItem(e.getRawSlot(), remove);
+                user.sendMessage("§7[§a!§7] §eVous venez de supprimer le kit §6" + k.getKitName() + "§e au joueur §c" + icmVictim.getName() + "§e !");
+                if (playerLoader.getPlayerByAPI(icmVictim) != null)
+                    playerLoader.getPlayerByAPI(icmVictim).sendMessage("§7[§cICM§7] §cVous venez de perdre l'accès au kit §a" + k.getKitName());
             }
             else if (!icmVictim.getKitAccess().contains(k.getKitName())) {
                 icmVictim.getKitAccess().add(k.getKitName());
                 e.getInventory().setItem(e.getRawSlot(), add);
+                user.sendMessage("§7[§a!§7] §eVous venez de donner l'acces au kit §6" + k.getKitName() + "§e à §a" + icmVictim.getName());
+                if (playerLoader.getPlayerByAPI(icmVictim) != null)
+                    playerLoader.getPlayerByAPI(icmVictim).sendMessage("§7[§cICM§7] §aVous venez de reçevoir de manière permanente le kit §a" + k.getKitName());
             }
         }
     }

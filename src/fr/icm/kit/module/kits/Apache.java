@@ -219,6 +219,7 @@ public class Apache extends Kit {
                                 continue;
                             if (victim.getHealth() - 1 <= 0) {
                                 victim.setHealth(0);
+                                deathByApacheArrow(victim);
                                 continue;
                             }
                             victim.damage(0);
