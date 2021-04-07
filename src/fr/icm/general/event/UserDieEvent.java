@@ -14,6 +14,7 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -157,7 +158,6 @@ public class UserDieEvent implements Listener {
                 }
             }
         }.runTaskTimer(PvPBox.getInstance, 0, 20);
-        PvPBox.getKitNPC.userJoinUpdate(p);
     }
 
     private void remove(ArrayList<ArmorStand> armorStandArrayList, Location l1, Location l2, Material b1, Material b2)
@@ -166,5 +166,12 @@ public class UserDieEvent implements Listener {
             armorStand.remove();
         l1.getBlock().setType(b1);
         l2.getBlock().setType(b2);
+    }
+
+    @EventHandler
+    private void whenPlayerRespawn(PlayerRespawnEvent e)
+    {
+        Player p = e.getPlayer();
+        PvPBox.getKitNPC.userJoinUpdate(p);
     }
 }

@@ -9,6 +9,7 @@ import fr.icm.kit.module.api.Tier;
 import org.bukkit.*;
 import org.bukkit.entity.*;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.inventory.meta.LeatherArmorMeta;
@@ -207,6 +208,7 @@ public class Apache extends Kit {
                                         continue;
                                     if (pl.getHealth() - 1 <= 0) {
                                         pl.setHealth(0);
+                                        deathByApacheArrow(pl);
                                         continue;
                                     }
                                     pl.damage(0);
@@ -225,7 +227,7 @@ public class Apache extends Kit {
                             for (Entity p : victim.getNearbyEntities(radius, radius, radius)) {
                                 if (p instanceof  Player) {
                                     Player pl = (Player) p;
-                                    if (icmParty != null && icmParty.convertArrayPlayer().contains(pl))
+                                    if (icmParty.convertArrayPlayer().contains(pl))
                                         continue;
                                     if (pl == damager)
                                         continue;
@@ -233,6 +235,7 @@ public class Apache extends Kit {
                                         continue;
                                     if (pl.getHealth() - 1 <= 0) {
                                         pl.setHealth(0);
+                                        deathByApacheArrow(pl);
                                         continue;
                                     }
                                     pl.damage(0);
@@ -262,4 +265,13 @@ public class Apache extends Kit {
             }
         }.runTaskTimer(PvPBox.getInstance, 0, 20L);
     }
+
+    public void deathByApacheArrow(Player p)
+    {
+        p.setHealth(p.getMaxHealth());
+        p.teleport(p.getLocation().getWorld().getSpawnLocation());
+        PvPBox.getKitNPC.userJoinUpdate(p);
+    }
+
 }
+
